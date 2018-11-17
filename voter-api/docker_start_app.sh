@@ -12,4 +12,5 @@ docker run \
   --name voter-web \
   -v /Users/mgoggin/Documents/projects/voter:/var/www/voter \
   --rm \
-  goggin13/voter
+  goggin13/voter \
+  bash
