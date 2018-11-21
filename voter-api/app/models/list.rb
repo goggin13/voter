@@ -10,13 +10,4 @@ class List < ApplicationRecord
 
     list
   end
-
-  def serializable_hash
-    list_hash = super
-    list_hash[:options] = options.inject([]) do |acc, option|
-      acc << option
-    end
-
-    list_hash
-  end
 end

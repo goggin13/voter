@@ -31,8 +31,8 @@ RSpec.describe "Lists", type: :request do
       parsed_response = JSON.parse(response.body)
       expect(parsed_response["name"]).to eq("my list")
       expect(parsed_response["options"].length).to eq(2)
-      expect(parsed_response["options"][0]).to eq("option 1")
-      expect(parsed_response["options"][1]).to eq("option 2")
+      expect(parsed_response["options"][0]["label"]).to eq("option 1")
+      expect(parsed_response["options"][1]["label"]).to eq("option 2")
     end
   end
 end
