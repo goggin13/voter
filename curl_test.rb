@@ -1,6 +1,12 @@
 require "json"
 require "shellwords"
 
+DOMAIN = if ARGV[0] == "local"
+  "localhost:3000"
+else
+  "https://agile-ridge-67293.herokuapp.com"
+end
+
 def do_command(command)
   puts command
   result = `#{command}`.chomp
@@ -8,7 +14,7 @@ def do_command(command)
 end
 
 def curl(method, path, payload=nil)
-  command = "curl -s -H 'Content-Type: application/json' -X#{method} https://agile-ridge-67293.herokuapp.com/#{path}"
+  command = "curl -s --cookie 'session_id=a1a806f9b7bbdf69' -H 'Content-Type: application/json' -X#{method} #{DOMAIN}/#{path}"
 
   if payload
     command += " -d \"#{payload.to_json.gsub("\"", "\\\"")}\""

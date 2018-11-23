@@ -10,4 +10,8 @@ class List < ApplicationRecord
 
     list
   end
+
+  def remaining_face_offs(user)
+    options.to_a.combination(2).to_a
+  end
 end
