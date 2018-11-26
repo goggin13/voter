@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Face Offs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Loser</th>
+      <th>User</th>
+      <th>Winner</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @face_offs.each do |face_off| %>
+      <tr>
+        <td><%= face_off.loser_id %></td>
+        <td><%= face_off.user_id %></td>
+        <td><%= face_off.winner_id %></td>
+        <td><%= link_to 'Show', face_off %></td>
+        <td><%= link_to 'Edit', edit_face_off_path(face_off) %></td>
+        <td><%= link_to 'Destroy', face_off, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Face Off', new_face_off_path %>

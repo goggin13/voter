@@ -21,8 +21,8 @@ RSpec.describe List, type: :model do
 
     it "does not return potential face_offs that been completed" do
       FactoryBot.create(
-        :faceoff,
-        :user_id => @user,
+        :face_off,
+        :user => @user,
         :winner => @option_1,
         :loser => @option_2,
       )

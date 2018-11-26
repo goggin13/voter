@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Loser:</strong>
+  <%= @face_off.loser_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @face_off.user_id %>
+</p>
+
+<p>
+  <strong>Winner:</strong>
+  <%= @face_off.winner_id %>
+</p>
+
+<%= link_to 'Edit', edit_face_off_path(@face_off) %> |
+<%= link_to 'Back', face_offs_path %>

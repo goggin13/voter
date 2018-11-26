@@ -50,11 +50,27 @@ RSpec.describe "Lists", type: :request do
 
         expect(response).to have_http_status(201)
 
+        option_1 = Option.where(:label => "option 1").first!
+        option_2 = Option.where(:label => "option 2").first!
+        option_3 = Option.where(:label => "option 3").first!
+
         parsed_response = JSON.parse(response.body)
         expect(parsed_response["face_offs"].length).to eq(3)
-        expect(parsed_response["face_offs"].to eq([
-
-        ])
+        expected = [
+          [
+            {"label" => "option 1", "id" => option_1.id},
+            {"label" => "option 2", "id" => option_2.id},
+          ],
+          [
+            {"label" => "option 1", "id" => option_1.id},
+            {"label" => "option 3", "id" => option_3.id},
+          ],
+          [
+            {"label" => "option 2", "id" => option_2.id},
+            {"label" => "option 3", "id" => option_3.id},
+          ],
+        ]
+        expect(parsed_response["face_offs"]).to eq(expected)
       end
 
       it "doesn't return already completed faceoffs" do
@@ -76,7 +92,7 @@ RSpec.describe "Lists", type: :request do
         winner_id = parsed_response["options"][0]["id"]
         loser_id = parsed_response["options"][0]["id"]
 
-        post list_face_off_path(List.last!, :format => :json), :params => {
+        post list_face_offs_path(List.last!.id, :format => :json), :params => {
           :face_off => {
             :winner_id => winner_id,
             :loser_id => loser_id,

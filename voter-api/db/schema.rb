@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_214259) do
+ActiveRecord::Schema.define(version: 2018_11_23_194811) do
+
+  create_table "face_offs", force: :cascade do |t|
+    t.integer "loser_id"
+    t.integer "user_id"
+    t.integer "winner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lists", force: :cascade do |t|
     t.string "name"
@@ -31,4 +39,5 @@ ActiveRecord::Schema.define(version: 2018_11_20_214259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
 end

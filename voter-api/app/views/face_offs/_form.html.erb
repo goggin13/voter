@@ -1,0 +1,32 @@
+<%= form_with(model: face_off, local: true) do |form| %>
+  <% if face_off.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(face_off.errors.count, "error") %> prohibited this face_off from being saved:</h2>
+
+      <ul>
+      <% face_off.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :loser_id %>
+    <%= form.number_field :loser_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :winner_id %>
+    <%= form.number_field :winner_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

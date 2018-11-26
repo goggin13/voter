@@ -1,2 +1,2 @@
-json.extract! option, :id, :label, :list_id, :created_at, :updated_at
+json.extract! option, :id, :label
 json.url option_url(option, format: :json)
