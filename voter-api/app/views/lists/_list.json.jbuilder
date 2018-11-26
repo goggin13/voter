@@ -10,3 +10,4 @@ json.face_offs(list.remaining_face_offs(@current_user)) do |option_pair|
     json.label option.label
   end
 end
+json.rankings list.rankings(@current_user)
