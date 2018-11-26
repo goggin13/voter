@@ -1,5 +1,7 @@
 class List < ApplicationRecord
   has_many :options
+  validates_presence_of :name
+  validates_presence_of :user_id
 
   def self.build_from_params(params)
     options = params.delete(:options)

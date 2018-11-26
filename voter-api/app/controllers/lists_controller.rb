@@ -24,7 +24,8 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.build_from_params(list_params)
+    @list = List
+      .build_from_params(list_params.merge(:user_id => current_user.id))
 
     respond_to do |format|
       if @list.save
@@ -69,6 +70,8 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:name, :user_id, :options => [:label])
+      params
+        .require(:list)
+        .permit(:name, :options => [:label])
     end
 end

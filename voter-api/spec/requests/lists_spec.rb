@@ -89,10 +89,11 @@ RSpec.describe "Lists", type: :request do
 
         expect(response).to have_http_status(201)
         parsed_response = JSON.parse(response.body)
+        list_id = parsed_response["id"]
         winner_id = parsed_response["options"][0]["id"]
-        loser_id = parsed_response["options"][0]["id"]
+        loser_id = parsed_response["options"][1]["id"]
 
-        post list_face_offs_path(List.last!.id, :format => :json), :params => {
+        post face_offs_path(:format => :json), :params => {
           :face_off => {
             :winner_id => winner_id,
             :loser_id => loser_id,
@@ -102,10 +103,10 @@ RSpec.describe "Lists", type: :request do
 
         expect(response).to have_http_status(201)
 
-        get lists_path(:format => :json), :params => {:session_id => session_id}
+        get list_path(id: list_id, :format => :json), :params => {:session_id => session_id}
         expect(response).to have_http_status(200)
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response["face_offs"]).to eq(2)
+        expect(parsed_response["face_offs"].length).to eq(2)
       end
     end
   end

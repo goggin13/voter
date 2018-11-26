@@ -1,6 +1,5 @@
 class FaceOffsController < ApplicationController
   before_action :set_face_off, only: [:show, :edit, :update, :destroy]
-  before_action :set_list
 
   # GET /face_offs
   # GET /face_offs.json
@@ -64,10 +63,6 @@ class FaceOffsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_face_off
       @face_off = FaceOff.find(params[:id])
-    end
-
-    def set_list
-      @list = List.find(params[:list_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
