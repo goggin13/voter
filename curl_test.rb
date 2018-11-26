@@ -38,6 +38,7 @@ puts "## Create a list"
 list = curl("POST", "lists.json", list_params)
 puts JSON.pretty_generate(list)
 
+puts "## vote"
 list["face_offs"].each do |pair|
   winner_id = pair[0]["id"]
   loser_id = pair[1]["id"]
@@ -48,3 +49,7 @@ list["face_offs"].each do |pair|
   })
   puts JSON.pretty_generate(vote)
 end
+
+puts "## Reload list, no face offs"
+reloaded_list = curl("GET", "/lists/#{list["id"]}.json")
+puts JSON.pretty_generate(reloaded_list)
