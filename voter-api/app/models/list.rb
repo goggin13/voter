@@ -4,7 +4,7 @@ class List < ApplicationRecord
   validates_presence_of :user_id
 
   def self.build_from_params(params)
-    options = params.delete(:options)
+    options = params.delete(:options).values
     list = List.new(params)
     options.each do |option|
       list.options.build(:label => option[:label])

@@ -50,6 +50,6 @@ list["face_offs"].each do |pair|
   puts JSON.pretty_generate(vote)
 end
 
-puts "## Reload list, no face offs"
+puts "## Reload list, no face offs, rankings displayed"
 reloaded_list = curl("GET", "/lists/#{list["id"]}.json")
 puts JSON.pretty_generate(reloaded_list)
