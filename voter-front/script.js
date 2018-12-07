@@ -12,7 +12,7 @@ const voterListFromUser = {
     this.options.push(newOpt);
 }
 };
-
+var dataVariable;
 function sendToServer () {
   const url = "https://agile-ridge-67293.herokuapp.com/lists.json";
   const payload = {
@@ -23,7 +23,10 @@ function sendToServer () {
   }
   $.post(url, payload, function(data,status) {
     alert("Data: " + data + "\nStatus: " + status);
-    console.log(data);
+    console.log(data); 
+    dataVariable = data; 
+    getFaceOffs(dataVariable);
+    //call function on data to commence next step
   }, 'json');
 
 };
@@ -46,11 +49,21 @@ $(document).ready(function(){
     });
     sendToServer(voterListFromUser);
 //voterListFromUser sent to server. See that function to find out what happens next.
-
-
+  console.log("after send to server")
   });// exit on click function
 });//exit on click function
+    
+function getFaceOffs(dataVariable) {
+  var faceOffs = dataVariable["face_offs"];
+  console.log(faceOffs.length);//prints array of faceofs
+  //loop through face_offs, print each one.
+  for (let i = 0; i < faceOffs.length; i ++) {
+    console.log("Faceoff!");
 
+    console.log(faceOffs[i][0]);
+    console.log(faceOffs[i][1]);
+  }
+  }; 
 
 
 //debug(voterListFromUser.titleOfList);
@@ -60,3 +73,4 @@ $(document).ready(function(){
 //debug(JSON.stringify(voterListFromUser))
 
 //console.log(JSON.stringify(voterListFromUser));
+
