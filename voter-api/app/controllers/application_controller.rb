@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     headers["Access-Control-Allow-Methods"] = "POST, PUT, DELETE, GET, OPTIONS"
     headers["Access-Control-Allow-Headers"] = "*"
     headers["Access-Control-Max-Age"] = "1728000"
+    headers["Access-Control-Allow-Credentials"] = true
   end
 
   def cors_preflight_check
