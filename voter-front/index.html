@@ -1,24 +1,35 @@
+
 <html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
 
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-
-  <body>
-    <div id="formPage">
+<body>
+  <div id="header">
     <h1>Hello Voter!</h1>
     <h2>Let's get deciding shall we?</h2>
+  </div>
 
-      <form id="form" onsubmit="return false;">
-        Enter a name for your list </br>
-        <input type = "text" name = "title"> 
-        <input type = "submit" value = "Huzzah!" onclick = "name()">
-        </br>
-        
-        
-      </form>
-    </div>
-  </body>
+  <div id="formdiv">
+    <form id="form" onsubmit="return false;">
+      Enter a name for your list <br>
+      <input type="text" id="titleOfForm">
+      <br>
+      <br>
+      Great! Now let's add options to your list! <br>
+        <input type="text" id="option1"> <br>
+        <input type="text" id="option2"> <br>
+        <input type="text" id="option3"> <br>
+        <input type="text" id="option4"> <br>
+        <input type="text" id="option5"> <br>
+        <input type="text" id="option6"> <br>
+        <input type="button" id="listOptionsGo" value="Huzzah! Let's Decide!">
+        <br>
+
+    </form>
+  </div>
+</body>
 
 </html>
