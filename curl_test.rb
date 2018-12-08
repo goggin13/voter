@@ -27,11 +27,11 @@ end
 list_params = {
   :list => {
     :name => "Test List",
-    :options => [
-      {:label => "pizza"},
-      {:label => "tacos"},
-      {:label => "thai"},
-    ]
+    :options => {
+      "1": {:label => "pizza"},
+      "2": {:label => "tacos"},
+      "3": {:label => "thai"},
+    }
   }
 }
 puts "## Create a list"
