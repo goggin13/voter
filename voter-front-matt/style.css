@@ -1,0 +1,11 @@
+body {
+  color: black;
+}
+
+#cast_vote_form {
+  display: none;
+}
+
+#results {
+  display: none;
+}
