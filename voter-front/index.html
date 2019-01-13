@@ -15,21 +15,32 @@
   <div id="formdiv">
     <form id="form" onsubmit="return false;">
       Enter a name for your list <br>
-      <input type="text" id="titleOfForm">
+      <input type="text" id="titleOfForm" value="My List">
       <br>
       <br>
       Great! Now let's add options to your list! <br>
-        <input type="text" id="option1"> <br>
-        <input type="text" id="option2"> <br>
-        <input type="text" id="option3"> <br>
-        <input type="text" id="option4"> <br>
+        <input type="text" id="option1" value="apples"> <br>
+        <input type="text" id="option2" value="bananas"> <br>
+        <input type="text" id="option3" value = "oranges"> <br>
+        <!---<input type="text" id="option4"> <br>
         <input type="text" id="option5"> <br>
-        <input type="text" id="option6"> <br>
+        <input type="text" id="option6"> <br> --->
         <input type="button" id="listOptionsGo" value="Huzzah! Let's Decide!">
+        <input type="button" id="buttontest" value="testvalue" onclick = "buttontesting()">
         <br>
 
     </form>
   </div>
+
+  <div id= "FaceOffSection" style="display: none;">
+      <h2> Pick one option for each face off </h2>
+      <table>
+        <tr> 
+          <th> <input type="button" id="face1" value="option A" onclick=> </th>
+          <th> <input type="button" id="face2" value="option B"> </th>
+        </tr>
+      </table>
+    </div> 
 </body>
 
 </html>
