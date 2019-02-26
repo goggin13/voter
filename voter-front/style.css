@@ -1,0 +1,102 @@
+h1 {
+font-family: "Heiti SC";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+}
+
+body {
+font-family: "Heiti SC";
+  font-size: 12px;
+  font-weight: 500;
+  margin: 10px;
+    color: #F36;
+
+}
+
+.rectangle-button1 {
+
+  height: 51px;
+  width: 160px;
+  border-radius: 8px;
+  background-color: #F36;
+  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.68);
+  color: #FFF;
+  font-family: "Heiti SC";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  margin: 10px;
+
+}
+
+.face-off-button {
+  height: 51px;
+  width: 160px;
+  border-radius: 8px;
+  background-color: #F36;
+  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.68);
+  color: #FFF;
+  font-family: "Heiti SC";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  margin: 10px;
+}
+
+.instructions {
+	width: 160px;
+  height: 20px;
+  color: #F36;
+  font-family: "Heiti SC";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+}
+
+
+
+.logo-bar {
+  height: 50px;
+  width: 160px;
+  background-color: #F36;
+  color: #FFF;
+  font-family: "Heiti SC";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+  align-content: center;
+
+}
+
+.results {
+	color: #F36;
+  font-family: "Heiti SC";
+}
+
+
+
+.enter-rectangle {
+  height: 41px;
+  width: 160px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #FBECEF 0%, #FFF 100%);
+  color: #F36;
+  font-family: "Heiti SC";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  padding: 20px;
+  margin: 10px;
+}
+
