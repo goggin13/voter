@@ -1,4 +1,4 @@
-//what to do with data once it's returned
+var list_id;
 const voterListFromUser = {
   name : "",
   options : [], 
@@ -10,18 +10,8 @@ const voterListFromUser = {
     console.log(optionx)
     console.log(this)
     this.options.push(newOpt);
-}
+  }
 };
-//html function to test button
-function buttontesting() {
-      var button = document.getElementById("buttontest").value
-      console.log("button pressed");
-      console.log("Button value: " + button);
-      button = "new value"; //variable/reference changes; but actual button value does not
-      document.getElementById("buttontest").value = "new value"; // change actual button value
-      console.log(button);
-    };
-
 
 $(document).ready(function(){  
   $("#listOptionsGo").click(function(){ //upon submitting form:
@@ -40,8 +30,6 @@ $(document).ready(function(){
       };  
     });
     firstSendToServer(voterListFromUser);
-//voterListFromUser sent to server. Proceed to send to server function to find out what happens next.
-  console.log("after send to server")
   });// exit on click function
 });//exit on click function
  
@@ -57,71 +45,97 @@ function firstSendToServer () {
   $.post(url, payload, function(data,status) {
     alert("Data: " + data + "\nStatus: " + status);
     console.log(data);
-    document.getElementById('FaceOffSection').style.display = "block";
+    $(document.getElementById('formdiv')).fadeOut();
+    $(document.getElementById('FaceOffSection')).fadeIn("slow");
     var faceOffs = data["face_offs"];
+    console.log(faceOffs);
     faceOffGo(faceOffs);
-    //call function on data to commence next step
+    list_id = data["id"];
   }, 'json');
 
 };
 
 
 function faceOffGo(faceOffs) {
-  console.log(faceOffs);//prints array of faceofs
-  if(faceOffs != undefined) {
-     let face1 = faceOffs[0][0]["label"];
-     var face1Button = document.getElementById('face1');
-     face1Button.value = face1;
-     let face2 = faceOffs[0][1]["label"];
-     var face2Button = document.getElementById('face2');
-     face2Button.value = face2;
-     
-     face1Button.addEventListener("click", function () { 
-       setWinner(face1,face2,faceOffs)
-       face1Button.removeEventListener("click");
-     });
-     face2Button.addEventListener("click", function () { 
-       setWinner(face2,face1,faceOffs); 
-       face2Button.removeEventListener("click") 
-     });
-  }    //end if statement
-  else {
-       console.log("out of faceoffs");
+  if(faceOffs.length == 0) {
+  console.log("out of faceoffs");
+  $(document.getElementById('headertext2')).fadeOut();
+  $(document.getElementById("FaceOffSection")).fadeOut();
+  $(document.getElementById("resultsdiv")).fadeIn("slow");
+
   }
-      
+  else {
+    let face1 = faceOffs[0][0]["label"];
+    let face1id = faceOffs[0][0]["id"];
+    var face1Button = document.getElementById('face1');
+    face1Button.value = face1;
+    let face2 = faceOffs[0][1]["label"];
+    let face2id = faceOffs[0][1]["id"];
+    var face2Button = document.getElementById('face2');
+    face2Button.value = face2;
+
+    $(face1Button).off();
+    $(face1Button).on("click", function listen1() { 
+      setWinner(face1id,face2id,faceOffs);
+    });
+    $(face2Button).off();
+    $(face2Button).on("click", function listen2() { 
+      setWinner(face2id,face1id,faceOffs); 
+     });
+  }    //end else statement
 };  // end faceOffGo function
 
 
 
-function setWinner(face1, face2, face_array) {
-  let winner = face1;
-  let loser = face2;
-  console.log("winner: " + face1);
-  console.log("loser: " + face2);
-  secondSendToServer(winner, loser);
+function setWinner(face1id, face2id, face_array) {
+  secondSendToServer(face1id, face2id);
   removeFaceOff(face_array);
-  console.log("new array: " + face_array);
   faceOffGo(face_array);
+
 };
 
 function removeFaceOff(face_array) {
-  array.shift();
-  return array;
+  face_array.shift();
 }
 
 function secondSendToServer(winner, loser) {
-  const url = "https://agile-ridge-67293.herokuapp.com/lists.json";
+  const faceoffurl = "https://agile-ridge-67293.herokuapp.com/face_offs.json";
   const payload = {
     face_off : {
       winner_id : winner,
       loser_id : loser
-    }
+    },
+    session_id : 7
   }
-  $.post(url, payload, function(data,status) {
-    alert("Data: " + data + "\nStatus: " + status);
-    console.log(data + " back from server");
+  var listurl = "https://agile-ridge-67293.herokuapp.com/lists/"+list_id+".json?session_id=7";
+  $.post(faceoffurl, payload, function(data,status) {
+    //console.log(data);
+    $.get(listurl, function(data2,status) {
+      console.log(data2);
+      listRankings(data2);
+    })
   }, 'json');
+
 }
 
+function listRankings(data2) {
+  var rankings = data2["rankings"];
+  var r = 1;
+  $.each(rankings, function (k,v) {
+    var label = v[0]["label"];
+    //var labelrank = rankings[0][0]; not working anyway
+    console.log(label);
+    console.log(rankings); 
+    //console.log(labelrank); 	
+    $("#result").html("apples");
+  	$("#listresults").append("<li>"+label+"</li>");
+  	$("#resultsrank").append("<li>"+r+"</li>");
+  	r += 1;
+    });
+  };
+    
+  //$(document.getElementById("listresults")).append("<li>Testing</li>"); 
 
-  //post to server list with winner and loser
+
+
+
