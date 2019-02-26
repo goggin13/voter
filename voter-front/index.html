@@ -7,39 +7,61 @@
 </head>
 
 <body>
-  <div id="header">
-    <h1>Hello Voter!</h1>
-    <h2>Let's get deciding shall we?</h2>
+  <div id="header" class="logo-bar">
+    <h1 id="headertext1">Hello Voter!</h1>
+    <!---<h2 id="headertext2">Let's get deciding shall we?</h2>--->
   </div>
 
+
   <div id="formdiv">
-    <form id="form" onsubmit="return false;">
+    <form id="form" class="instructions" onsubmit="return false;">
       Enter a name for your list <br>
-      <input type="text" id="titleOfForm" value="My List">
+      <input type="text" class ="enter-rectangle" class="instructions" id="titleOfForm"  value="My List">
       <br>
       <br>
       Great! Now let's add options to your list! <br>
-        <input type="text" id="option1" value="apples"> <br>
-        <input type="text" id="option2" value="bananas"> <br>
-        <input type="text" id="option3" value = "oranges"> <br>
+        <input type="text" class ="enter-rectangle" id="option1" value="apples"> <br>
+        <input type="text" class ="enter-rectangle" id="option2" value="bananas"> <br>
+        <input type="text" class ="enter-rectangle" id="option3" value = "oranges"> <br>
         <!---<input type="text" id="option4"> <br>
         <input type="text" id="option5"> <br>
         <input type="text" id="option6"> <br> --->
-        <input type="button" id="listOptionsGo" value="Huzzah! Let's Decide!">
-        <input type="button" id="buttontest" value="testvalue" onclick = "buttontesting()">
+        <input type="button" class="rectangle-button1" id="listOptionsGo" value="Let's Decide!">
         <br>
 
     </form>
   </div>
 
-  <div id= "FaceOffSection" style="display: none;">
-      <h2> Pick one option for each face off </h2>
+  <div id= "FaceOffSection"  style="display: none;" class="instructions">
+      Pick one option for each face off
       <table>
         <tr> 
-          <th> <input type="button" id="face1" value="option A" onclick=> </th>
-          <th> <input type="button" id="face2" value="option B"> </th>
+          <th> <input type="button" class="face-off-button" id="face1" value="option A" onclick=> </th>
+        </tr>
+        <tr>
+          <th> <input type="button" class="face-off-button" id="face2" value="option B"> </th>
         </tr>
       </table>
+    </div> 
+
+    <div id= "resultsdiv" style="display:none;" class="results">
+      <h2> You're preferred choice is: </h2>
+      <h1 id="result" style="text-align:left"> My Result!  </h1>
+      <h3> Full list in order of rank: </h3>
+      <table>
+        <tr>
+          <td>
+            <ul id="listresults" style="list-style-type:none">
+            </ul>
+          </td>
+          <td>
+            <ul id="resultsrank" style="list-style-type:none">
+            </ul>
+          </td>
+        </tr>
+      </table>  
+
+
     </div> 
 </body>
 
