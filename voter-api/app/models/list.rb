@@ -52,7 +52,7 @@ class List < ApplicationRecord
       acc[face_off.loser_id][:l] += 1
 
       acc
-    end.sort_by { |option_id, record| record[:win] }
+    end.sort_by { |option_id, record| record[:l] }
 
     rankings = {}
     previous_wins = nil

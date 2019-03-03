@@ -64,5 +64,17 @@ RSpec.describe List, type: :model do
         1 => [@option_1, @option_2, @option_3],
       })
     end
+
+    it "returns the correct rankings for a user if the first faceoff doesn't contain the winner" do
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_2)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_3, :loser => @option_1)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_3, :loser => @option_2)
+
+      expect(@list.rankings(@user)).to eq({
+        1 => [@option_3],
+        2 => [@option_1],
+        3 => [@option_2],
+      })
+    end
   end
 end

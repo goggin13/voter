@@ -37,10 +37,10 @@ RSpec.describe "Lists", type: :request do
       post lists_path(:format => :json), :params => {
         :list => {
           :name => "my list",
-          :options => [
-            {:label => "option 1"},
-            {:label => "option 2"},
-          ]
+          :options => {
+            "1" => {:label => "option 1"},
+            "2" => {:label => "option 2"},
+          }
         }
       }
 
@@ -64,11 +64,11 @@ RSpec.describe "Lists", type: :request do
         post lists_path(:format => :json), :params => {
           :list => {
             :name => "my list",
-            :options => [
-              {:label => "option 1"},
-              {:label => "option 2"},
-              {:label => "option 3"},
-            ],
+            :options => {
+              "1" => {:label => "option 1"},
+              "2" => {:label => "option 2"},
+              "3" => {:label => "option 3"},
+            },
           }
         }
 
@@ -102,11 +102,11 @@ RSpec.describe "Lists", type: :request do
         post lists_path(:format => :json), :params => {
           :list => {
             :name => "my list",
-            :options => [
-              {:label => "option 1"},
-              {:label => "option 2"},
-              {:label => "option 3"},
-            ],
+            :options => {
+              "1" => {:label => "option 1"},
+              "2" => {:label => "option 2"},
+              "3" => {:label => "option 3"},
+            },
           },
           :session_id => session_id
         }

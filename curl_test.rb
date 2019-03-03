@@ -40,8 +40,8 @@ puts JSON.pretty_generate(list)
 
 puts "## vote"
 list["face_offs"].each do |pair|
-  winner_id = pair[0]["id"]
-  loser_id = pair[1]["id"]
+  winner_id = pair[1]["id"]
+  loser_id = pair[0]["id"]
 
   vote = curl("POST", "/face_offs.json", {
     :winner_id => winner_id,
