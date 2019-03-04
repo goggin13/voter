@@ -45,27 +45,26 @@ class List < ApplicationRecord
   def rankings(user)
     return {} unless user_has_completed_voting?(user)
 
-    records = face_offs_for_user(user).inject({}) do |acc, face_off|
-      acc[face_off.winner_id] ||= {w: 0, l: 0}
-      acc[face_off.winner_id][:w] += 1
-      acc[face_off.loser_id] ||= {w: 0, l: 0}
-      acc[face_off.loser_id][:l] += 1
-
-      acc
-    end.sort_by { |option_id, record| record[:l] }
+    scoreboard = options.map do |option|
+      {
+        :option => option,
+        :wins => FaceOff.where(:winner_id => option.id).count
+      }
+    end.sort_by { |record| record[:wins] }.reverse
 
     rankings = {}
     previous_wins = nil
     (1..options.length).each do |rank|
-      option_id, record = records.shift
-      if previous_wins && record[:w] == previous_wins
+      row = scoreboard.shift
+      if previous_wins && row[:wins] == previous_wins
         lowest_reached_rank = rankings.keys.sort.first
-        rankings[lowest_reached_rank] << Option.find(option_id)
+        rankings[lowest_reached_rank] << row[:option]
+        rankings[lowest_reached_rank].sort! { |a,b| a.label.downcase <=> b.label.downcase }
       else
-        rankings[rank] = [Option.find(option_id)]
+        rankings[rank] = [row[:option]]
       end
 
-      previous_wins = record[:w]
+      previous_wins = row[:wins]
     end
 
     rankings
