@@ -121,17 +121,18 @@ function secondSendToServer(winner, loser) {
 function listRankings(data2) {
   var rankings = data2["rankings"];
   var r = 1;
-  $.each(rankings, function (k,v) {
-    var label = v[0]["label"];
-    //var labelrank = rankings[0][0]; not working anyway
-    console.log(label);
-    console.log(rankings); 
-    //console.log(labelrank); 	
-    $("#result").html("apples");
-  	$("#listresults").append("<li>"+label+"</li>");
-  	$("#resultsrank").append("<li>"+r+"</li>");
-  	r += 1;
-    });
+  if (Object.keys(rankings).length > 0) {
+    var first_choice = rankings["1"][0]["label"];
+    $("#result").html(first_choice);
+    $.each(rankings, function (k,v) {
+      var label = v[0]["label"];
+      console.log(label);
+      console.log(rankings); 
+    	$("#listresults").append("<li>"+label+"</li>");
+    	$("#resultsrank").append("<li>"+r+"</li>");
+    	r += 1;
+      });
+    }
   };
     
   //$(document.getElementById("listresults")).append("<li>Testing</li>"); 
