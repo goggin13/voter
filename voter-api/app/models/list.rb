@@ -14,7 +14,7 @@ class List < ApplicationRecord
   end
 
   def remaining_face_offs(user)
-    face_off_id_pairs = face_offs(user).map do |face_off|
+    face_off_id_pairs = face_offs_for_user(user).map do |face_off|
       [face_off.winner.id, face_off.loser.id].sort
     end
 
@@ -39,13 +39,13 @@ class List < ApplicationRecord
     option_count = options.count
     required_face_offs = (option_count * (option_count - 1)) / 2
 
-    face_offs(user).count == required_face_offs
+    face_offs_for_user(user).count == required_face_offs
   end
 
   def rankings(user)
     return {} unless user_has_completed_voting?(user)
 
-    records = face_offs(user).inject({}) do |acc, face_off|
+    records = face_offs_for_user(user).inject({}) do |acc, face_off|
       acc[face_off.winner_id] ||= {w: 0, l: 0}
       acc[face_off.winner_id][:w] += 1
       acc[face_off.loser_id] ||= {w: 0, l: 0}
@@ -71,12 +71,27 @@ class List < ApplicationRecord
     rankings
   end
 
-  def face_offs(user)
+  def face_offs_for_user(user)
     option_ids = options.map(&:id)
     FaceOff.where(
       :user_id => user.id,
       :loser_id => option_ids,
       :winner_id => option_ids
     )
+  end
+
+  def all_face_offs
+    FaceOff
+      .where("winner_id in (:option_ids) OR loser_id in (:option_ids)", :option_ids => options.map(&:id))
+  end
+
+  def narrative(user)
+    return [] unless user_has_completed_voting?(user)
+
+    all_face_offs
+      .sort { |a,b| a.user.name.downcase <=> b.user.name.downcase }
+      .map do |face_off|
+      "#{face_off.user.name} chose #{face_off.winner.label} over #{face_off.loser.label}"
+    end
   end
 end

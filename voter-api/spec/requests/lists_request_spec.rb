@@ -2,33 +2,52 @@ require 'rails_helper'
 
 RSpec.describe "Lists", type: :request do
   describe "GET /lists" do
-    it "works! (now write some real specs)" do
-      get lists_path
-      expect(response).to have_http_status(200)
-    end
+    context "completed by the current user" do
+      before do
+        @session_id = "abc"
+        @user = FactoryBot.create(:user, :name => @session_id)
+        @list = FactoryBot.create(:list)
+        @option_1 = FactoryBot.create(:option, :list => @list, :label => "Pizza")
+        @option_2 = FactoryBot.create(:option, :list => @list, :label => "Tacos")
+        @option_3 = FactoryBot.create(:option, :list => @list, :label => "Thai")
+        FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_2)
+        FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_3)
+        FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
+      end
 
-    it "returns rankings when a user has completed all the face offs" do
-      session_id = "abc"
-      user = FactoryBot.create(:user, :name => session_id)
-      list = FactoryBot.create(:list)
-      option_1 = FactoryBot.create(:option, :list => list, :label => "Pizza")
-      option_2 = FactoryBot.create(:option, :list => list, :label => "Tacos")
-      option_3 = FactoryBot.create(:option, :list => list, :label => "Thai")
-      FactoryBot.create(:face_off, :user => user, :winner => option_1, :loser => option_2)
-      FactoryBot.create(:face_off, :user => user, :winner => option_1, :loser => option_3)
-      FactoryBot.create(:face_off, :user => user, :winner => option_2, :loser => option_3)
+      it "returns rankings when a user has completed all the face offs" do
+        get list_path(id: @list.id, :format => :json), :params => {:session_id => @session_id}
+        expect(response).to have_http_status(200)
 
-      get list_path(id: list.id, :format => :json), :params => {:session_id => session_id}
-      expect(response).to have_http_status(200)
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response["face_offs"].length).to eq(0)
 
-      parsed_response = JSON.parse(response.body)
-      expect(parsed_response["face_offs"].length).to eq(0)
+        expect(parsed_response["rankings"]).to eq({
+          "1" => [JSON.parse(@option_1.to_json)],
+          "2" => [JSON.parse(@option_2.to_json)],
+          "3" => [JSON.parse(@option_3.to_json)],
+        })
+      end
 
-      expect(parsed_response["rankings"]).to eq({
-        "1" => [JSON.parse(option_1.to_json)],
-        "2" => [JSON.parse(option_2.to_json)],
-        "3" => [JSON.parse(option_3.to_json)],
-      })
+      it "returns descriptions for everyone votes when a user has completed all the face offs" do
+        other_user = FactoryBot.create(:user, :name => "User 2")
+        FactoryBot.create(:face_off, :user => other_user, :winner => @option_1, :loser => @option_2)
+        FactoryBot.create(:face_off, :user => other_user, :winner => @option_1, :loser => @option_3)
+        FactoryBot.create(:face_off, :user => other_user, :winner => @option_2, :loser => @option_3)
+
+        get list_path(id: @list.id, :format => :json), :params => {:session_id => @session_id}
+        expect(response).to have_http_status(200)
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response["narrative"]).to eq([
+          "#{@session_id} chose Pizza over Tacos",
+          "#{@session_id} chose Pizza over Thai",
+          "#{@session_id} chose Tacos over Thai",
+          "User 2 chose Pizza over Tacos",
+          "User 2 chose Pizza over Thai",
+          "User 2 chose Tacos over Thai",
+        ])
+      end
     end
   end
 
