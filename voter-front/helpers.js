@@ -25,11 +25,16 @@ function getSessionId() {
 function setUserName(username, callback) {
   var url = HOST + "/users/link.json";
   var payload = {name: username};
-  $post(url, payload, function(data,status) {
-  });
+  $post(url, payload, callback);
 }
 
 function $post(url, payload, callback) {
   payload.session_id = getSessionId();
   $.post(url, payload, callback);
+}
+
+function $get(url, callback) {
+  payload.session_id = getSessionId();
+  url += "?session_id=" + session_id;
+  $.post(url, callback);
 }
