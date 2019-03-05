@@ -7,7 +7,7 @@ $(document).ready(function(){
     var copyText = document.getElementById("sharableLink");
     copyText.select();
     document.execCommand("copy");
-    alert("text copied")
+    $("#copyLink").val("Copied!");
   });
 });
 
@@ -18,21 +18,22 @@ $(document).ready(function(){
    //if there are no faceoffs, show results
     if(faceOffs.length == 0) {
       listRankings(data);
-      $(document.getElementById("enterName")).hide();
-      $(document.getElementById("linkButton")).hide();
-      $(document.getElementById("shareThisLink")).hide();
+      $(document.getElementById("linkAndNamePage")).hide();
       $(document.getElementById("resultsdiv")).show();
       $(document.getElementById("resultsrank")).show();
     }
     else {
       $("#listOptionsGo").click(function(){ 
-        const userName = document.getElementById("userName").value;
-        setUserName(userName);
-        $(document.getElementById("enterName")).fadeOut();
-        $(document.getElementById("linkButton")).fadeOut();
-        $(document.getElementById("shareThisLink")).fadeOut();
-        $(document.getElementById("FaceOffSection")).fadeIn("slow");
-        faceOffGo(faceOffs);
+        if($('#userName').val() == ''){
+          alert('You must enter a name');
+        }
+        else {
+          const userName = document.getElementById("userName").value;
+          setUserName(userName);
+          $(document.getElementById("linkAndNamePage")).fadeOut();
+          $(document.getElementById("FaceOffSection")).fadeIn("slow");
+          faceOffGo(faceOffs);
+        }; 
       });
     };
   }, 'json');
