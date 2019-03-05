@@ -1,0 +1,78 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="constants.js"></script>
+  <script src="helpers.js"></script> 
+  <script src="voting.js"></script>
+</head>
+
+<body>
+  <div id="header" class="logo-bar">
+    <h1 id="headertext1">Hello Voter!</h1>
+  </div>
+
+<!--- SECOND PAGE - GET LINK, ENTER NAME TO START VOTING-->
+<div id="shareThisLink" class="instructions">
+	Share this link and get input from others!
+</div>
+
+<div id="linkButton">
+	<input type="text" class="enter-rectangle" style="font-size: 15; width: 40%" id="sharableLink" value="http://localhost:8000/voting.html?list_id=487">
+	<input type="button" class="rectangle-button1" style="max-width: 20%;" id="copyLink" value="Copy">
+</div>
+
+<div id= "enterName" class="instructions">
+  Enter your name to start voting
+  <input type="text" class ="enter-rectangle" id="userName"> 
+  <input type="button" class="rectangle-button1" id="listOptionsGo" value="Start Voting!">
+</div>
+
+
+<!--- START SELECTING-->
+  <div id= "FaceOffSection"  style="display: none;" class="instructions">
+      Pick one option for each face off
+      <table>
+        <tr> 
+          <th> <input type="button" class="face-off-button" id="face1" value="option A" onclick=> </th>
+        </tr>
+        <tr>
+          <th> <input type="button" class="face-off-button" id="face2" value="option B"> </th>
+        </tr>
+      </table>
+    </div> 
+
+
+<!--- LAST PAGE, RESULTS, Appears when no more faceoffs-->
+    <div id= "resultsdiv" style="display:none;" class="results">
+      <h2> You chose: </h2>
+      <h1 id="result" style="text-align:left"> Oops! No Result!</h1>
+      <ul id="tielist" style="list-style-type:none">
+      </ul>
+      <table class="results-table">
+      <h3> Full list in order of rank: </h3>
+        <tr>
+          <th>
+            Options
+          </th>
+          <th>
+            Rank
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <ul id="listresults" style="list-style-type:none">
+            </ul>
+          </td>
+          <td>
+            <ul id="resultsrank" style="list-style-type:none">
+             </ul>
+          </td>
+        </tr>
+      </table>  
+
+
+    </div> 
+</body>
+
+</html>
