@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    @current_user = User.find_or_create_by(:name => @session_id).tap do |user|
+    @current_user = User.find_or_create_by(:session_id => @session_id).tap do |user|
       Rails.logger.info "[Session] current user #{user.inspect}"
     end
   end

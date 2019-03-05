@@ -61,6 +61,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_user_name
+    @user = User.where(:session_id => @session_id).first!
+    @user.name = params[:name]
+    @user.save!
+    render :show, status: :ok, location: @user, format: :json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
