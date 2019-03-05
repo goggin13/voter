@@ -8,8 +8,8 @@ font-family: "Heiti SC";
 
 body {
 width: 100%;
-margin: 20;
-padding: 20;
+margin: 5%;
+padding: 5%;
 min-height: 100%;
 font-family: "Heiti SC";
   font-size: 12px;
@@ -37,7 +37,8 @@ font-family: "Heiti SC";
 
 .rectangle-button1 {
   height: 51px;
-  max-width: 70%;
+  max-width: 80%;
+  min-width: 40%;
   border-radius: 8px;
   background-color: #F36;
   box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.68);
@@ -48,11 +49,6 @@ font-family: "Heiti SC";
   line-height: 20px;
   text-align: center;
   margin: 10px;
-}
-
-
-.linkButton{
-  position:relative;
 }
 
 .face-off-button {
@@ -71,7 +67,8 @@ font-family: "Heiti SC";
 }
 
 .instructions {
-	max-width: 70%;
+  width: 50%;
+  max-width: 90%;
   height: 20px;
   color: #F36;
   font-family: "Heiti SC";
@@ -80,22 +77,17 @@ font-family: "Heiti SC";
   line-height: 20px;
   text-align: center;
   margin: 20px;
-  padding: 10px;
+  padding: 30px;
 }
-
-
-
 
 .results {
 	color: #F36;
   font-family: "Heiti SC";
 }
 
-
-
 .enter-rectangle {
-  height: 41px;
-  max-width: 90%;
+  height: 50px;
+  max-width: 100%;
   border-radius: 8px;
   background: linear-gradient(90deg, #FBECEF 0%, #FFF 100%);
   color: #F36;
