@@ -3,6 +3,8 @@ const voterListFromUser = {
   name : "",
   options : [], 
 
+
+
   addOptions(optionx) {
     newOpt = {
       label : optionx
@@ -14,7 +16,15 @@ const voterListFromUser = {
 };
 
 $(document).ready(function(){  
-  $("#listOptionsGo").click(function(){ //upon submitting form:
+  $("#proceedToName").click(function(){ //let's decide button:
+    $(document.getElementById('formdiv')).fadeOut();
+    $(document.getElementById('nameAndLink')).fadeIn("slow");
+    const userName = document.getElementById("userName").value
+  });
+});
+
+$(document).ready(function(){  
+  $("#listOptionsGo").click(function(){ //start voting button:
     voterListFromUser.name = document.getElementById("titleOfForm").value
     var optionsArray = [];
     optionsArray.push(document.getElementById("option1").value);
@@ -45,8 +55,8 @@ function firstSendToServer () {
   $.post(url, payload, function(data,status) {
     //alert("Data: " + data + "\nStatus: " + status);
     console.log(data);
-    $(document.getElementById('formdiv')).fadeOut();
-    $(document.getElementById('FaceOffSection')).fadeIn("slow");
+    $(document.getElementById('nameAndLink')).fadeOut();
+    $(document.getElementById('FaceOffSection')).fadeIn();
     var faceOffs = data["face_offs"];
     console.log(faceOffs);
     faceOffGo(faceOffs);
@@ -149,7 +159,6 @@ function listRankings(data2) {
   }
 };
     
-  //$(document.getElementById("listresults")).append("<li>Testing</li>"); 
 
 
 
