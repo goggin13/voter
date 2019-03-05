@@ -88,7 +88,7 @@ class List < ApplicationRecord
     return [] unless user_has_completed_voting?(user)
 
     all_face_offs
-      .sort { |a,b| a.user.name.downcase <=> b.user.name.downcase }
+      .sort { |a,b| a.user.name <=> b.user.name }
       .map do |face_off|
       "#{face_off.user.name} chose #{face_off.winner.label} over #{face_off.loser.label}"
     end
