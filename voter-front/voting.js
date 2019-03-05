@@ -2,7 +2,14 @@
 var list_id = getListId();
 var listurl = "https://agile-ridge-67293.herokuapp.com/lists/"+list_id+".json";
 
-
+$(document).ready(function(){
+  $("#linkButton").click(function(){
+    var copyText = document.getElementById("sharableLink");
+    copyText.select();
+    document.execCommand("copy");
+    alert("text copied")
+  });
+});
 
 $(document).ready(function(){  
   $get(listurl, function(data,status) {
@@ -13,7 +20,8 @@ $(document).ready(function(){
       const userName = document.getElementById("userName").value;
       setUserName(userName);
       $(document.getElementById("enterName")).fadeOut();
-      $(document.getElementById("linkButton")).fadeOut(); //not working!! no idea why
+      $(document.getElementById("linkButton")).fadeOut();
+      $(document.getElementById("shareThisLink")).fadeOut();
       $(document.getElementById("FaceOffSection")).fadeIn("slow");
       faceOffGo(faceOffs);
     });
