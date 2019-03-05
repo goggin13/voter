@@ -34,7 +34,8 @@ function $post(url, payload, callback) {
 }
 
 function $get(url, callback) {
-  payload.session_id = getSessionId();
-  url += "?session_id=" + session_id;
-  $.post(url, callback);
+  url += "?session_id=" + getSessionId();
+  $.get(url, callback);
 }
+
+console.log(getSessionId());
