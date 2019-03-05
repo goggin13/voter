@@ -1,2 +1,2 @@
-git subtree push --prefix voter-api heroku master
+git push heroku `git subtree split --prefix voter-api master`:master --force
 heroku run rails db:migrate
