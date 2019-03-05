@@ -16,26 +16,34 @@ $(document).ready(function(){
     console.log(data);
     var faceOffs = data["face_offs"];
    //if there are no faceoffs, show results
-    $("#listOptionsGo").click(function(){ 
-      const userName = document.getElementById("userName").value;
-      setUserName(userName);
-      $(document.getElementById("enterName")).fadeOut();
-      $(document.getElementById("linkButton")).fadeOut();
-      $(document.getElementById("shareThisLink")).fadeOut();
-      $(document.getElementById("FaceOffSection")).fadeIn("slow");
-      faceOffGo(faceOffs);
-    });
+    if(faceOffs.length == 0) {
+      listRankings(data);
+      $(document.getElementById("enterName")).hide();
+      $(document.getElementById("linkButton")).hide();
+      $(document.getElementById("shareThisLink")).hide();
+      $(document.getElementById("resultsdiv")).show();
+      $(document.getElementById("resultsrank")).show();
+    }
+    else {
+      $("#listOptionsGo").click(function(){ 
+        const userName = document.getElementById("userName").value;
+        setUserName(userName);
+        $(document.getElementById("enterName")).fadeOut();
+        $(document.getElementById("linkButton")).fadeOut();
+        $(document.getElementById("shareThisLink")).fadeOut();
+        $(document.getElementById("FaceOffSection")).fadeIn("slow");
+        faceOffGo(faceOffs);
+      });
+    };
   }, 'json');
 });
 
 
 function faceOffGo(faceOffs) {
   if(faceOffs.length == 0) {
-  console.log("out of faceoffs");
   $(document.getElementById('headertext2')).fadeOut();
   $(document.getElementById("FaceOffSection")).fadeOut();
   $(document.getElementById("resultsdiv")).fadeIn("slow"); 
-
   }
   else {
     let face1 = faceOffs[0][0]["label"];
@@ -88,7 +96,6 @@ function sendWinnersToServer(winner, loser) {
   }, 'json');
 
 }
-
 
 function listRankings(data2) {
   var rankings = data2["rankings"];
