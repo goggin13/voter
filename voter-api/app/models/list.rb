@@ -93,4 +93,13 @@ class List < ApplicationRecord
       "#{face_off.user.name} chose #{face_off.winner.label} over #{face_off.loser.label}"
     end
   end
+
+  def completed_voting_count(current_user)
+    return 0 unless user_has_completed_voting?(current_user)
+
+    User
+      .find(all_face_offs.map(&:user_id).uniq)
+      .select { |user| user_has_completed_voting?(user) }
+      .length
+  end
 end

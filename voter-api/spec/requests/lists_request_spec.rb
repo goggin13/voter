@@ -48,6 +48,17 @@ RSpec.describe "Lists", type: :request do
           "User 2 chose Tacos over Thai",
         ])
       end
+
+      it "returns the number of people who have completed voting" do
+        other_user = FactoryBot.create(:user, :name => "User 2")
+        FactoryBot.create(:face_off, :user => other_user, :winner => @option_1, :loser => @option_2)
+
+        get list_path(id: @list.id, :format => :json), :params => {:session_id => @session_id}
+        expect(response).to have_http_status(200)
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response["completed_voting_count"]).to eq(1)
+      end
     end
   end
 

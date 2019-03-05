@@ -110,4 +110,24 @@ RSpec.describe List, type: :model do
       ])
     end
   end
+
+  describe "completed_voting_count" do
+    before do
+      @list = FactoryBot.create(:list)
+      @user = FactoryBot.create(:user, :name => "User 1")
+      @option_1 = FactoryBot.create(:option, :list => @list, :label => "Pizza")
+      @option_2 = FactoryBot.create(:option, :list => @list, :label => "Tacos")
+      @option_3 = FactoryBot.create(:option, :list => @list, :label => "Thai")
+    end
+
+    it "returns the number of users who have completed voting" do
+      other_user = FactoryBot.create(:user, :name => "User 2")
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_2)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_3)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
+      FactoryBot.create(:face_off, :user => other_user, :winner => @option_2, :loser => @option_3)
+
+      expect(@list.completed_voting_count(@user)).to eq(1)
+    end
+  end
 end
