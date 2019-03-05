@@ -43,7 +43,7 @@ function firstSendToServer () {
     }
   }
   $.post(url, payload, function(data,status) {
-    alert("Data: " + data + "\nStatus: " + status);
+    //alert("Data: " + data + "\nStatus: " + status);
     console.log(data);
     $(document.getElementById('formdiv')).fadeOut();
     $(document.getElementById('FaceOffSection')).fadeIn("slow");
@@ -61,7 +61,7 @@ function faceOffGo(faceOffs) {
   console.log("out of faceoffs");
   $(document.getElementById('headertext2')).fadeOut();
   $(document.getElementById("FaceOffSection")).fadeOut();
-  $(document.getElementById("resultsdiv")).fadeIn("slow");
+  $(document.getElementById("resultsdiv")).fadeIn("slow"); 
 
   }
   else {
@@ -91,7 +91,6 @@ function setWinner(face1id, face2id, face_array) {
   secondSendToServer(face1id, face2id);
   removeFaceOff(face_array);
   faceOffGo(face_array);
-
 };
 
 function removeFaceOff(face_array) {
@@ -118,22 +117,37 @@ function secondSendToServer(winner, loser) {
 
 }
 
+
 function listRankings(data2) {
   var rankings = data2["rankings"];
   var r = 1;
   if (Object.keys(rankings).length > 0) {
-    var first_choice = rankings["1"][0]["label"];
-    $("#result").html(first_choice);
-    $.each(rankings, function (k,v) {
-      var label = v[0]["label"];
-      console.log(label);
-      console.log(rankings); 
-    	$("#listresults").append("<li>"+label+"</li>");
-    	$("#resultsrank").append("<li>"+r+"</li>");
-    	r += 1;
+    var qty_of_winners = Object.keys(rankings["1"]).length;
+    if (qty_of_winners > 1) {
+      $("#result").html("There was a " + qty_of_winners + "-way tie!");
+      
+      $.each(rankings["1"], function (k,v) {
+        var tied_label = v["label"];
+        console.log(Object.keys(rankings));
+        $("#listresults").append("<li>"+tied_label+"</li>");
+        $("#resultsrank").append("<li>"+Object.keys(rankings)+"</li>");
       });
     }
-  };
+    
+    else {
+     var first_choice = rankings["1"][0]["label"];
+     $("#result").html(first_choice);
+     $.each(rankings, function (k,v) {
+       var label = v[0]["label"];
+       console.log(label);
+       console.log(k + v); 
+     	$("#listresults").append("<li>"+label+"</li>");
+     	$("#resultsrank").append("<li>"+k+"</li>");
+     	r += 1;
+     });
+    }
+  }
+};
     
   //$(document.getElementById("listresults")).append("<li>Testing</li>"); 
 
