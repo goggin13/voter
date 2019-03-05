@@ -27,12 +27,17 @@ $(document).ready(function(){
     //optionsArray.push(document.getElementById("option5").value);
     //optionsArray.push(document.getElementById("option6").value);
     optionsArray = optionsArray.filter(Boolean);//making sure it's truthy
-    optionsArray.forEach(function(option) {
-      if(option != undefined) {
-        voterListFromUser.addOptions(option);
-      };  
-    });
-    sendListToServer(voterListFromUser);
+    if (optionsArray.length < 2) {
+      alert("You must have at least two options");
+      } 
+    else {
+      optionsArray.forEach(function(option) {
+        if(option != undefined) {
+          voterListFromUser.addOptions(option);
+        };  
+      });
+      sendListToServer(voterListFromUser);
+    }
   });// exit on click function
 });//exit on click function
  
