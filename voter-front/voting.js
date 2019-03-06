@@ -15,7 +15,10 @@ $(document).ready(function(){
   $get(listurl, function(data,status) {
     console.log(data);
     var faceOffs = data["face_offs"];
-   //if there are no faceoffs, show results
+    var listName = data["name"];
+    $("#enterName").append(" "+listName+"!");
+    $("#faceOffTitle").append(listName); 
+    $("#listNameRanking").append(" "+listName+"!");
     if(faceOffs.length == 0) {
       listRankings(data);
       $(document.getElementById("linkAndNamePage")).hide();
@@ -97,39 +100,31 @@ function sendWinnersToServer(winner, loser) {
   }, 'json');
 
 }
+  
 
 function listRankings(data2) {
   var rankings = data2["rankings"];
-  var r = 1;
   if (Object.keys(rankings).length > 0) {
     var qty_of_winners = Object.keys(rankings["1"]).length;
     if (qty_of_winners > 1) {
       $("#result").html("There was a " + qty_of_winners + "-way tie!");
-      
-      $.each(rankings["1"], function (k,v) {
-        var tied_label = v["label"];
-        console.log(Object.keys(rankings));
-        $("#listresults").append("<li>"+tied_label+"</li>");
-        $("#resultsrank").append("<li>"+Object.keys(rankings)+"</li>");
-      });
-    }
-    
+    } 
     else {
      var first_choice = rankings["1"][0]["label"];
-     $("#result").html(first_choice);
-     $.each(rankings, function (k,v) {
-       var label = v[0]["label"];
-       console.log(label);
-       console.log(k + v); 
-     	$("#listresults").append("<li>"+label+"</li>");
-     	$("#resultsrank").append("<li>"+k+"</li>");
-     	r += 1;
-     });
+     $("#result").html(first_choice); 
     }
-  }
-};
-    
-
+  };
+  $.each(rankings, function (rank,options){
+      var r = rank;
+    $.each(options, function (index, option){
+      var label = option["label"];
+      console.log(rank);
+      console.log(option);
+      $("#listresults").append("<li>"+label+"</li>");
+      $("#resultsrank").append("<li>"+r+"</li>");
+    });
+  });
+}
 
 
 
