@@ -1,3 +1,12 @@
+# Git Cheat Sheet
+## pushing your changes
+1. `git add -Av`
+2. `git commit -m "<trello> - I made a thing better"`
+3. `git push`
+
+## pulling other changes
+1. `git pull`
+
 # Todo
 
 1. Create HTML Form
@@ -67,5 +76,3 @@ $("#test").hide() - hides the element with id="test".
 AJAX:
 $.post(URL,data,callback);
 
-
-    
