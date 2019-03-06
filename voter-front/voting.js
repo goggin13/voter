@@ -3,6 +3,7 @@ var list_id = getListId();
 var listurl = "https://agile-ridge-67293.herokuapp.com/lists/"+list_id+".json";
 
 $(document).ready(function(){
+  document.getElementById("sharableLink").value = getSharableLink();
   $("#linkButton").click(function(){
     var copyText = document.getElementById("sharableLink");
     copyText.select();
@@ -103,6 +104,7 @@ function sendWinnersToServer(winner, loser) {
   
 
 function listRankings(data2) {
+  displayNarrative($("#narrative"), data2);
   var rankings = data2["rankings"];
   if (Object.keys(rankings).length > 0) {
     var qty_of_winners = Object.keys(rankings["1"]).length;
