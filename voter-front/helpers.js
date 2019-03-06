@@ -38,9 +38,7 @@ function $get(url, callback) {
   $.get(url, callback);
 }
 
-function getSharableLink() {
-  return window.location.href;
-}
+
 
 function displayNarrative($div, list) {
   $.each(list["narrative"], function(index, line) {
