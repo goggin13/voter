@@ -76,6 +76,22 @@ RSpec.describe List, type: :model do
         3 => [@option_2],
       })
     end
+
+    it "returns the correct rankings if there is a tie not for first" do
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_2)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_3, :loser => @option_1)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_3, :loser => @option_2)
+
+      user_2 = FactoryBot.create(:user)
+      FactoryBot.create(:face_off, :user => user_2, :winner => @option_2, :loser => @option_1)
+      FactoryBot.create(:face_off, :user => user_2, :winner => @option_3, :loser => @option_1)
+      FactoryBot.create(:face_off, :user => user_2, :winner => @option_3, :loser => @option_2)
+
+      expect(@list.rankings(@user)).to eq({
+        1 => [@option_3],
+        2 => [@option_1, @option_2],
+      })
+    end
   end
 
   describe "narrative" do

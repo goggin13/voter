@@ -54,14 +54,15 @@ class List < ApplicationRecord
 
     rankings = {}
     previous_wins = nil
+    previous_rank = nil
     (1..options.length).each do |rank|
       row = scoreboard.shift
       if previous_wins && row[:wins] == previous_wins
-        lowest_reached_rank = rankings.keys.sort.first
-        rankings[lowest_reached_rank] << row[:option]
-        rankings[lowest_reached_rank].sort! { |a,b| a.label.downcase <=> b.label.downcase }
+        rankings[previous_rank] << row[:option]
+        rankings[previous_rank].sort! { |a,b| a.label.downcase <=> b.label.downcase }
       else
         rankings[rank] = [row[:option]]
+        previous_rank = rank
       end
 
       previous_wins = row[:wins]

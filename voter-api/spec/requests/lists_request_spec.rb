@@ -5,7 +5,7 @@ RSpec.describe "Lists", type: :request do
     context "completed by the current user" do
       before do
         @session_id = "abc"
-        @user = FactoryBot.create(:user, :name => @session_id)
+        @user = FactoryBot.create(:user, :session_id => @session_id, :name => "abc")
         @list = FactoryBot.create(:list)
         @option_1 = FactoryBot.create(:option, :list => @list, :label => "Pizza")
         @option_2 = FactoryBot.create(:option, :list => @list, :label => "Tacos")
@@ -40,12 +40,12 @@ RSpec.describe "Lists", type: :request do
 
         parsed_response = JSON.parse(response.body)
         expect(parsed_response["narrative"]).to eq([
-          "#{@session_id} chose Pizza over Tacos",
-          "#{@session_id} chose Pizza over Thai",
-          "#{@session_id} chose Tacos over Thai",
           "User 2 chose Pizza over Tacos",
           "User 2 chose Pizza over Thai",
           "User 2 chose Tacos over Thai",
+          "#{@session_id} chose Pizza over Tacos",
+          "#{@session_id} chose Pizza over Thai",
+          "#{@session_id} chose Tacos over Thai",
         ])
       end
 
