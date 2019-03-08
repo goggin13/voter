@@ -10,7 +10,7 @@ function getUrlVars() {
 }
 
 function heartbeat(){
-  $.get("lists.json", function(data) { });
+  $get("lists.json", function(data) { });
 }
 
 function getListId() {

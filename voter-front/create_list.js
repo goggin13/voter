@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 
 function sendListToServer () {
-  const url = HOST + "/lists.json";
+  const url = "lists.json";
   const payload = {
     list : {
       name : voterListFromUser.name,
