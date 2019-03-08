@@ -18,6 +18,9 @@ const voterListFromUser = {
 
 $(document).ready(function(){  
   $("#proceedToName").click(function(){ 
+    $(document.getElementById("proceedToName")).hide();
+    $(document.getElementById("loading_gif")).show();
+
     voterListFromUser.name = document.getElementById("titleOfForm").value
     var optionsArray = [];
     optionsArray.push(document.getElementById("option1").value);
