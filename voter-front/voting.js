@@ -2,20 +2,20 @@
 var list_id = getListId();
 var listurl = "lists/"+list_id+".json";
 
-function setUpLinkSharer () {
+function setUpLinkSharer (id) {
   console.log("setUpLinkSharer")
   var windowlink = window.location.href;
-  $("#sharableLink").val(windowlink);
-  $("#linkButton").click(function(){
-    var copyText = document.getElementById("sharableLink");
+  $(".sharableLink").val(windowlink);
+  $(".linkButton").click(function(){
+    var copyText = document.getElementById(id);
     copyText.select();
     document.execCommand("copy");
-    $("#copyLink").val("Copied!");
+    $(".copyLink").val("Copied!");
   });
 }
 
 $(document).ready(function(){  
-  setUpLinkSharer();
+  setUpLinkSharer("sharableLink");
 });
 
 $(document).ready(function(){
@@ -38,7 +38,7 @@ $(document).ready(function(){
       $(document.getElementById("linkAndNamePage")).hide();
       $(document.getElementById("resultsdiv")).show();
       $(document.getElementById("resultsrank")).show();
-      setUpLinkSharer();
+ 
     }
     else {
       $("#listOptionsGo").click(function(){
@@ -51,7 +51,6 @@ $(document).ready(function(){
           $(document.getElementById("linkAndNamePage")).fadeOut();
           $(document.getElementById("FaceOffSection")).fadeIn("slow");
           faceOffGo(faceOffs);
-          setUpLinkSharer();
         };
       });
     };
@@ -64,7 +63,6 @@ function faceOffGo(faceOffs) {
     $(document.getElementById('headertext2')).fadeOut();
     $(document.getElementById("FaceOffSection")).fadeOut();
     $(document.getElementById("resultsdiv")).show();
-    setUpLinkSharer();
   } else {
     let face1 = faceOffs[0][0]["label"];
     let face1id = faceOffs[0][0]["id"];
@@ -142,7 +140,7 @@ function listRankings(data2) {
     });
   });
   $("#voterQty").append(data2["completed_voting_count"]);
-  setUpLinkSharer();
+  setUpLinkSharer("sharableLink2");
 }
 
 
