@@ -11,5 +11,5 @@ json.face_offs(list.remaining_face_offs(@current_user)) do |option_pair|
   end
 end
 json.rankings list.rankings(@current_user)
-json.narrative list.narrative(@current_user)
+json.narrative list.narrative_for_user(@current_user)
 json.completed_voting_count list.completed_voting_count(@current_user)

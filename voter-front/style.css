@@ -100,5 +100,9 @@ font-family: "Heiti SC";
   margin: 10px;
 }
 
+#slow_server_response {
+  border-radius: 6px;
+
+}
 
 

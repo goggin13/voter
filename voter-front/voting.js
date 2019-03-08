@@ -1,8 +1,9 @@
 
 var list_id = getListId();
-var listurl = "https://agile-ridge-67293.herokuapp.com/lists/"+list_id+".json";
+var listurl = "lists/"+list_id+".json";
 
 $(document).ready(function(){
+  console.log("2");
   var windowlink = window.location.href;
   $("#sharableLink").val(windowlink);
   $("#linkButton").click(function(){
@@ -13,13 +14,14 @@ $(document).ready(function(){
   });
 });
 
-$(document).ready(function(){  
+$(document).ready(function(){
+  console.log("1");
   $get(listurl, function(data,status) {
     console.log(data);
     var faceOffs = data["face_offs"];
     var listName = data["name"];
     $("#enterName").append(" "+listName+"!");
-    $("#faceOffTitle").append(listName); 
+    $("#faceOffTitle").append(listName);
     $("#listNameRanking").append(" "+listName+"!");
     if(faceOffs.length == 0) {
       listRankings(data);
@@ -28,7 +30,7 @@ $(document).ready(function(){
       $(document.getElementById("resultsrank")).show();
     }
     else {
-      $("#listOptionsGo").click(function(){ 
+      $("#listOptionsGo").click(function(){
         if($('#userName').val() == ''){
           alert('You must enter a name');
         }
@@ -38,7 +40,7 @@ $(document).ready(function(){
           $(document.getElementById("linkAndNamePage")).fadeOut();
           $(document.getElementById("FaceOffSection")).fadeIn("slow");
           faceOffGo(faceOffs);
-        }; 
+        };
       });
     };
   }, 'json');
@@ -49,7 +51,7 @@ function faceOffGo(faceOffs) {
   if(faceOffs.length == 0) {
   $(document.getElementById('headertext2')).fadeOut();
   $(document.getElementById("FaceOffSection")).fadeOut();
-  $(document.getElementById("resultsdiv")).fadeIn("slow"); 
+  $(document.getElementById("resultsdiv")).fadeIn("slow");
   }
   else {
     let face1 = faceOffs[0][0]["label"];
@@ -62,12 +64,12 @@ function faceOffGo(faceOffs) {
     face2Button.value = face2;
 
     $(face1Button).off();
-    $(face1Button).on("click", function listen1() { 
+    $(face1Button).on("click", function listen1() {
       setWinner(face1id,face2id,faceOffs);
     });
     $(face2Button).off();
-    $(face2Button).on("click", function listen2() { 
-      setWinner(face2id,face1id,faceOffs); 
+    $(face2Button).on("click", function listen2() {
+      setWinner(face2id,face1id,faceOffs);
      });
   }    //end else statement
 };  // end faceOffGo function
@@ -85,14 +87,14 @@ function removeFaceOff(face_array) {
 }
 
 function sendWinnersToServer(winner, loser) {
-  const faceoffurl = "https://agile-ridge-67293.herokuapp.com/face_offs.json";
+  const faceoffurl = "face_offs.json";
   const payload = {
     face_off : {
       winner_id : winner,
       loser_id : loser
     },
   }
-  var listurl = "https://agile-ridge-67293.herokuapp.com/lists/"+list_id+".json";
+  var listurl = "lists/"+list_id+".json";
   $post(faceoffurl, payload, function(data,status) {
     //console.log(data);
     $get(listurl, function(data2,status) {
@@ -102,7 +104,7 @@ function sendWinnersToServer(winner, loser) {
   }, 'json');
 
 }
-  
+
 
 function listRankings(data2) {
   displayNarrative($("#narrative"), data2);
@@ -111,10 +113,10 @@ function listRankings(data2) {
     var qty_of_winners = Object.keys(rankings["1"]).length;
     if (qty_of_winners > 1) {
       $("#result").html("There was a " + qty_of_winners + "-way tie!");
-    } 
+    }
     else {
      var first_choice = rankings["1"][0]["label"];
-     $("#result").html(first_choice); 
+     $("#result").html(first_choice);
     }
   };
   $.each(rankings, function (rank,options){

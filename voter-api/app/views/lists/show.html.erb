@@ -10,5 +10,20 @@
   <%= @list.user_id %>
 </p>
 
+<p>
+  Options
+  <ul>
+    <% @list.options.each do |option| %>
+      <li><%= option.label %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <% @list.narrative.each do |line| %>
+    <li><%= line %></li>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>

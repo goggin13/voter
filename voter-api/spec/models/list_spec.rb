@@ -94,7 +94,7 @@ RSpec.describe List, type: :model do
     end
   end
 
-  describe "narrative" do
+  describe "narrative_for_user" do
     before do
       @list = FactoryBot.create(:list)
       @user = FactoryBot.create(:user, :name => "User 1")
@@ -104,7 +104,7 @@ RSpec.describe List, type: :model do
     end
 
     it "returns an empty array when the user has not completed voting" do
-      expect(@list.narrative(@user)).to eq([])
+      expect(@list.narrative_for_user(@user)).to eq([])
     end
 
     it "returns rankings when a user has completed all the face offs" do
@@ -116,7 +116,7 @@ RSpec.describe List, type: :model do
       FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
       FactoryBot.create(:face_off, :user => other_user, :winner => @option_2, :loser => @option_3)
 
-      expect(@list.narrative(@user)).to eq([
+      expect(@list.narrative_for_user(@user)).to eq([
         "User 1 chose Pizza over Tacos",
         "User 1 chose Pizza over Thai",
         "User 1 chose Tacos over Thai",

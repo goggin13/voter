@@ -1,9 +1,7 @@
 var list_id;
 const voterListFromUser = {
   name : "",
-  options : [], 
-
-
+  options : [],
 
   addOptions(optionx) {
     newOpt = {
@@ -15,9 +13,8 @@ const voterListFromUser = {
   }
 };
 
-
-$(document).ready(function(){  
-  $("#proceedToName").click(function(){ 
+$(document).ready(function(){
+  $("#proceedToName").click(function(){
     $(document.getElementById("proceedToName")).hide();
     $(document.getElementById("loading_gif")).show();
 
@@ -32,21 +29,21 @@ $(document).ready(function(){
     optionsArray = optionsArray.filter(Boolean);//making sure it's truthy
     if (optionsArray.length < 2) {
       alert("You must have at least two options");
-      } 
+      }
     else {
       optionsArray.forEach(function(option) {
         if(option != undefined) {
           voterListFromUser.addOptions(option);
-        };  
+        };
       });
       sendListToServer(voterListFromUser);
     }
   });// exit on click function
 });//exit on click function
- 
+
 
 function sendListToServer () {
-  const url = "https://agile-ridge-67293.herokuapp.com/lists.json";
+  const url = HOST + "/lists.json";
   const payload = {
     list : {
       name : voterListFromUser.name,

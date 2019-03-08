@@ -1,9 +1,16 @@
+// var HOST = "https://agile-ridge-67293.herokuapp.com";
+var HOST = "http://localhost:3000"
+
 function getUrlVars() {
   var vars = {};
   var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
     vars[key] = value;
   });
   return vars;
+}
+
+function heartbeat(){
+  $.get("lists.json", function(data) { });
 }
 
 function getListId() {
@@ -23,22 +30,20 @@ function getSessionId() {
 }
 
 function setUserName(username, callback) {
-  var url = HOST + "/users/link.json";
   var payload = {name: username};
-  $post(url, payload, callback);
+  $post("users/link.json", payload, callback);
 }
 
-function $post(url, payload, callback) {
+function $post(path, payload, callback) {
   payload.session_id = getSessionId();
-  $.post(url, payload, callback);
+  $.post(HOST + "/" + path, payload, callback);
 }
 
-function $get(url, callback) {
-  url += "?session_id=" + getSessionId();
-  $.get(url, callback);
+function $get(path, callback) {
+  path += "?session_id=" + getSessionId();
+  console.log(HOST + path);
+  $.get(HOST + "/" + path, callback);
 }
-
-
 
 function displayNarrative($div, list) {
   $.each(list["narrative"], function(index, line) {
@@ -46,4 +51,5 @@ function displayNarrative($div, list) {
   });
 }
 
+heartbeat();
 console.log(getSessionId());

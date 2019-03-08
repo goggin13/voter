@@ -85,13 +85,19 @@ class List < ApplicationRecord
       .where("winner_id in (:option_ids) OR loser_id in (:option_ids)", :option_ids => options.map(&:id))
   end
 
-  def narrative(user)
-    return [] unless user_has_completed_voting?(user)
-
+  def narrative
     all_face_offs
       .sort { |a,b| a.user.name <=> b.user.name }
       .map do |face_off|
       "#{face_off.user.name} chose #{face_off.winner.label} over #{face_off.loser.label}"
+    end
+  end
+
+  def narrative_for_user(user)
+    if user_has_completed_voting?(user)
+      narrative
+    else
+      []
     end
   end
 
