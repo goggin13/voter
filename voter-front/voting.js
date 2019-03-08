@@ -2,8 +2,8 @@
 var list_id = getListId();
 var listurl = "lists/"+list_id+".json";
 
-$(document).ready(function(){
-  console.log("2");
+function setUpLinkSharer () {
+  console.log("setUpLinkSharer")
   var windowlink = window.location.href;
   $("#sharableLink").val(windowlink);
   $("#linkButton").click(function(){
@@ -11,6 +11,16 @@ $(document).ready(function(){
     copyText.select();
     document.execCommand("copy");
     $("#copyLink").val("Copied!");
+  });
+}
+
+$(document).ready(function(){  
+  setUpLinkSharer();
+});
+
+$(document).ready(function(){
+  $("#backtostart").click(function(){
+    window.location.href='create_list.html';
   });
 });
 
@@ -28,6 +38,7 @@ $(document).ready(function(){
       $(document.getElementById("linkAndNamePage")).hide();
       $(document.getElementById("resultsdiv")).show();
       $(document.getElementById("resultsrank")).show();
+      setUpLinkSharer();
     }
     else {
       $("#listOptionsGo").click(function(){
@@ -40,6 +51,7 @@ $(document).ready(function(){
           $(document.getElementById("linkAndNamePage")).fadeOut();
           $(document.getElementById("FaceOffSection")).fadeIn("slow");
           faceOffGo(faceOffs);
+          setUpLinkSharer();
         };
       });
     };
@@ -49,11 +61,11 @@ $(document).ready(function(){
 
 function faceOffGo(faceOffs) {
   if(faceOffs.length == 0) {
-  $(document.getElementById('headertext2')).fadeOut();
-  $(document.getElementById("FaceOffSection")).fadeOut();
-  $(document.getElementById("resultsdiv")).fadeIn("slow");
-  }
-  else {
+    $(document.getElementById('headertext2')).fadeOut();
+    $(document.getElementById("FaceOffSection")).fadeOut();
+    $(document.getElementById("resultsdiv")).show();
+    setUpLinkSharer();
+  } else {
     let face1 = faceOffs[0][0]["label"];
     let face1id = faceOffs[0][0]["id"];
     var face1Button = document.getElementById('face1');
@@ -129,6 +141,8 @@ function listRankings(data2) {
       $("#resultsrank").append("<li>"+r+"</li>");
     });
   });
+  $("#voterQty").append(data2["completed_voting_count"]);
+  setUpLinkSharer();
 }
 
 
