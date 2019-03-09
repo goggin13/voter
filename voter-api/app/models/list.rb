@@ -87,7 +87,7 @@ class List < ApplicationRecord
 
   def narrative
     all_face_offs
-      .sort { |a,b| a.user.name <=> b.user.name }
+      .sort { |a,b| a.user.id <=> b.user.id }
       .map do |face_off|
       "#{face_off.user.name} chose #{face_off.winner.label} over #{face_off.loser.label}"
     end
