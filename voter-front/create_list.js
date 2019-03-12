@@ -23,8 +23,8 @@ $(document).ready(function(){
     optionsArray.push(document.getElementById("option1").value);
     optionsArray.push(document.getElementById("option2").value);
     optionsArray.push(document.getElementById("option3").value);
-   // optionsArray.push(document.getElementById("option4").value);
-    //optionsArray.push(document.getElementById("option5").value);
+    optionsArray.push(document.getElementById("option4").value);
+    optionsArray.push(document.getElementById("option5").value);
     //optionsArray.push(document.getElementById("option6").value);
     optionsArray = optionsArray.filter(Boolean);//making sure it's truthy
     if (optionsArray.length < 2) {

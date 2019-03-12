@@ -119,6 +119,8 @@ function sendWinnersToServer(winner, loser) {
 function listRankings(data2) {
   displayNarrative($("#narrative"), data2);
   var rankings = data2["rankings"];
+  $("#voterQty").val(data2["completed_voting_count"]);
+  setUpLinkSharer("sharableLink2");
   if (Object.keys(rankings).length > 0) {
     var qty_of_winners = Object.keys(rankings["1"]).length;
     if (qty_of_winners > 1) {
@@ -139,8 +141,7 @@ function listRankings(data2) {
       $("#resultsrank").append("<li>"+r+"</li>");
     });
   });
-  $("#voterQty").append(data2["completed_voting_count"]);
-  setUpLinkSharer("sharableLink2");
+
 }
 
 
