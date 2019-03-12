@@ -40,12 +40,12 @@ RSpec.describe "Lists", type: :request do
 
         parsed_response = JSON.parse(response.body)
         expect(parsed_response["narrative"]).to eq([
-          "User 2 chose Pizza over Tacos",
-          "User 2 chose Pizza over Thai",
-          "User 2 chose Tacos over Thai",
           "#{@session_id} chose Pizza over Tacos",
           "#{@session_id} chose Pizza over Thai",
           "#{@session_id} chose Tacos over Thai",
+          "User 2 chose Pizza over Tacos",
+          "User 2 chose Pizza over Thai",
+          "User 2 chose Tacos over Thai",
         ])
       end
 

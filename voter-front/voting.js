@@ -1,9 +1,7 @@
 
 var list_id = getListId();
-var listurl = "lists/"+list_id+".json";
 
 function setUpLinkSharer (id) {
-  console.log("setUpLinkSharer")
   var windowlink = window.location.href;
   $(".sharableLink").val(windowlink);
   $(".linkButton").click(function(){
@@ -14,7 +12,7 @@ function setUpLinkSharer (id) {
   });
 }
 
-$(document).ready(function(){  
+$(document).ready(function(){
   setUpLinkSharer("sharableLink");
 });
 
@@ -25,8 +23,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  console.log("1");
-  $get(listurl, function(data,status) {
+  getList(list_id, function(data,status) {
     console.log(data);
     var faceOffs = data["face_offs"];
     var listName = data["name"];
@@ -38,7 +35,7 @@ $(document).ready(function(){
       $(document.getElementById("linkAndNamePage")).hide();
       $(document.getElementById("resultsdiv")).show();
       $(document.getElementById("resultsrank")).show();
- 
+
     }
     else {
       $("#listOptionsGo").click(function(){
@@ -47,10 +44,11 @@ $(document).ready(function(){
         }
         else {
           const userName = document.getElementById("userName").value;
-          setUserName(userName);
-          $(document.getElementById("linkAndNamePage")).fadeOut();
-          $(document.getElementById("FaceOffSection")).fadeIn("slow");
-          faceOffGo(faceOffs);
+          setUserName(userName, function () {
+            $(document.getElementById("linkAndNamePage")).fadeOut();
+            $(document.getElementById("FaceOffSection")).fadeIn("slow");
+            faceOffGo(faceOffs);
+          });
         };
       });
     };
@@ -104,45 +102,50 @@ function sendWinnersToServer(winner, loser) {
       loser_id : loser
     },
   }
-  var listurl = "lists/"+list_id+".json";
   $post(faceoffurl, payload, function(data,status) {
-    //console.log(data);
-    $get(listurl, function(data2,status) {
-      console.log(data2);
+    getList(list_id, function(data2,status) {
       listRankings(data2);
-    })
+    });
   }, 'json');
 
 }
 
 
 function listRankings(data2) {
-  displayNarrative($("#narrative"), data2);
   var rankings = data2["rankings"];
-  $("#voterQty").val(data2["completed_voting_count"]);
   setUpLinkSharer("sharableLink2");
   if (Object.keys(rankings).length > 0) {
-    var qty_of_winners = Object.keys(rankings["1"]).length;
-    if (qty_of_winners > 1) {
-      $("#result").html("There was a " + qty_of_winners + "-way tie!");
-    }
-    else {
-     var first_choice = rankings["1"][0]["label"];
-     $("#result").html(first_choice);
-    }
+    displayResults(data2);
+    pollForListUpdates(data2, function(updated_list) {
+      $("#headertext1").fadeOut(300).html("Results Updated").fadeIn(300).fadeOut(200).fadeIn(200);
+      displayResults(updated_list);
+    });
   };
+}
+
+function displayResults(list) {
+  console.log("displayResults");
+  var rankings = list["rankings"];
+  var qty_of_winners = Object.keys(rankings["1"]).length;
+  displayNarrative($("#narrative"), list);
+  $("#voterQty").html("Number of voters: " + list["completed_voting_count"]);
+  if (qty_of_winners > 1) {
+    $("#result").html("There was a " + qty_of_winners + "-way tie!");
+  }
+  else {
+   var first_choice = rankings["1"][0]["label"];
+   $("#result").html(first_choice);
+  }
+
+  $("#resultsrank").html("")
+  $("#listresults").html("")
   $.each(rankings, function (rank,options){
-      var r = rank;
+    var r = rank;
     $.each(options, function (index, option){
       var label = option["label"];
-      console.log(rank);
-      console.log(option);
       $("#listresults").append("<li>"+label+"</li>");
       $("#resultsrank").append("<li>"+r+"</li>");
     });
   });
-
-}
-
-
+};
 

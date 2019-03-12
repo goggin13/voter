@@ -34,6 +34,24 @@ function setUserName(username, callback) {
   $post("users/link.json", payload, callback);
 }
 
+function getList(list_id, callback) {
+  var path = "lists/" + list_id + ".json";
+  $get(path, callback);
+}
+
+function pollForListUpdates(old_list, callback) {
+  var poll = function () {
+    getList(old_list["id"], function(new_list) {
+      if (old_list["narrative"].length < new_list["narrative"].length) {
+        old_list = new_list;
+        callback(new_list);
+      }
+      setTimeout(poll, 1000);
+    });
+  }
+  setTimeout(poll, 1000);
+}
+
 function $post(path, payload, callback) {
   payload.session_id = getSessionId();
   $.post(HOST + "/" + path, payload, callback);
@@ -46,6 +64,7 @@ function $get(path, callback) {
 }
 
 function displayNarrative($div, list) {
+  $div.html("");
   $.each(list["narrative"], function(index, line) {
     $div.append("<li>" + line + "</li>");
   });
