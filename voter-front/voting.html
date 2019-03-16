@@ -4,99 +4,97 @@
   <link rel="stylesheet" href="style.css">
   <script src="helpers.js"></script>
   <script src="voting.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="favicon.png" />
+  <meta charset='UTF-8'/>
+  <meta name='viewport'
+      content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+  <title>DecideKick</title>
 </head>
 
 <body>
-  <div id="header" class="logo-bar">
-    <h1 id="headertext1">Hello Sexy!</h1>
-  </div>
-
-<!--- SECOND PAGE - GET LINK, ENTER NAME TO START VOTING-->
-<div id="linkAndNamePage">
-	<div id= "enterName" class="instructions" style="padding-bottom: 20%">
-	  Enter your name to start voting on
-	 </div>
-	 <div>
-	 	 <input type="text" class ="enter-rectangle" id="userName">
-	  	<input type="button" class="rectangle-button1" id="listOptionsGo" value="Start Voting!">
-	 </div>
+  <header>
+    DecideKick
+  </header>
 
 
-	<div id="shareThisLink" class="instructions" style="padding-top: 20%">
-		Share this link and get input from others!
+  <section>
+    <div class="page">
+<!--- TO ENTER NAME TO START VOTING-->      
+      <div class=form id=nameSection>
+        <div class="instructions" id="enterNameInstructions">
+          No snoozin' while we're choosin'
+        </div>
+        <div class="form-row enter-name">
+          <input type="text" class ="input name-input" id="userName" placeholder="Enter your name here">
+          <input type="button" class="button start-button" id="listOptionsGo" value="Start">
+          </div>
+      </div>  
 
-		<div id="linkButton" class="linkButton">
-			<input type="text" class="enter-rectangle sharableLink" style="font-size: 15;" id="sharableLink" value="http://localhost:8000/	voting.html?list_id=487">
-			<input type="button" class="rectangle-button1 copyLink" id="copyLink" value="Copy">
-		</div>
-	</div>
-</div>
-
-
-<!--- START SELECTING-->
-  <div id= "FaceOffSection"  style="display: none;" class="instructions">
-      Select one option for each match up
-      <table>
-      	<tr>
-      	  <th> <h3 id="faceOffTitle">
-        <tr>
-          <th> <input type="button" class="face-off-button" id="face1" value="option A" onclick=> </th>
-        </tr>
-        <tr>
-          <th> <input type="button" class="face-off-button" id="face2" value="option B"> </th>
-        </tr>
-      </table>
-    </div>
-
+<!--- TO VOTE BETWEEN TWO OPTIONS-->
+      <div id= "FaceOffSection"  style="display: none;" class="instructions">
+          Select one option for each match up
+          <table>
+            <tr>
+              <th> <id="faceOffTitle"> </th>
+            </tr>
+            <tr>
+              <th> <input type="button" class="button faceOff" id="face1" value="option A" onclick=> </th>
+            </tr>
+            <tr>
+              <th> <input type="button" class="button faceOff" id="face2" value="option B"> </th>
+            </tr>
+          </table>
+      </div>
 
 <!--- LAST PAGE, RESULTS, Appears when no more faceoffs-->
-<div id= "resultsdiv" style="display:none;" class="results">
-  <div>
-    <h2> You chose: </h2>
-    <h1 id="result" style="text-align:left"> Oops! No Result!</h1> 
-    <ul id="tielist" style="list-style-type:none">
-    </ul>
-    <table class="results-table">
-    <h3 id=listNameRanking> Ranking for</h3>
-      <tr>
-        <th>
-          Ranking
-        </th>
-        <th>
-          Option
-        </th>
-      </tr>
-      <tr>
-        <td>
-          <ul id="resultsrank" style="list-style-type:none">
-           </ul>
-        </td>
-        <td>
-         <ul id="listresults" style="list-style-type:none">
-         </ul>
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div>
-    <p id="voterQty"> Number of voters: </p>
-    <ul id="narrative"></ul>
-  </div>   
-  <div id="more_links">
-    <div>
-      <p class="instructions"> "Share this link and get input from others! </p>
-      <div id="linkButton" class="linkButton">
-        <input type="text" class="enter-rectangle sharableLink"  style="font-size: 15;" id="sharableLink2" value="link info!">
-        <input type="button" class="rectangle-button1 copyLink" id="copyLink" value="Copy">
-      </div>  
-     </div> 
-     <div>
-      <input type="button" id="backtostart" class="rectangle-button1" value="Start a new list">
-     </div>
-  </div>
+      <div id= "resultsdiv" style="display:none;" class="results">
+        <div>
+          <h2> You chose: </h2>
+          <h1 id="result" style="text-align:left"> Oops! No Result!</h1> 
+          <ul id="tielist" style="list-style-type:none">
+          </ul>
+          <table class="results-table">
+          <h3 id=listNameRanking> Ranking for</h3>
+            <tr>
+              <th>
+                Ranking
+              </th>
+              <th>
+                Option
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <ul id="resultsrank" style="list-style-type:none">
+                 </ul>
+              </td>
+              <td>
+               <ul id="listresults" style="list-style-type:none">
+               </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <p id="voterQty"> Number of voters: </p>
+          <ul id="narrative"></ul>
+        </div>   
+        <div id="more_links">
+          <div>
+            <p class="instructions"> "Share this link and get input from others! </p>
+            <div id="linkButton" class="button">
+              <input type="text" class="input sharableLink"  style="font-size: 15;" id=     "sharableLink2" value="link info!">     
+              <input type="button" class="rectang     le-button1 copyLink" id="copyLink"      value="Copy">   
+            </div>        
+           </div>       
+           <div>      
+            <inp      ut type="button" id="backtostart" class="rectangle-button1" value="     Start a new list">    
+           </div>
+        </div>
+    </div>
 </div>
-</body>
+</section>
 
-</html>
+<footer>
+    
+</footer>

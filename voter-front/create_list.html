@@ -6,6 +6,10 @@
   <script src="helpers.js"></script>
   <script src="create_list.js"></script>
   <link rel="icon" type="image/png" href="favicon.png" />
+  <meta charset='UTF-8'/>
+  <meta name='viewport'
+      content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+  <title>DecideKick</title>
 </head>
 
 <body>
@@ -13,28 +17,42 @@
     <h1 id="headertext1">Hello Voter!</h1>
   </div>
 
-<!--- FIRST PAGE, ENTER LIST-->
-  <div id="formdiv">
-    <form id="form" class="instructions" onsubmit="return false;">
-      Enter a name for your list <br>
-      <input type="text" class ="enter-rectangle" class="instructions" id="titleOfForm">
-      <br>
-      <br>
-      Great! Now let's add options to your list! <br>
-        <input type="text" class ="enter-rectangle" id="option1">  <br>
-        <input type="text" class ="enter-rectangle" id="option2">  <br>
-        <input type="text" class ="enter-rectangle" id="option3"> <br>
-        <input type="text" class ="enter-rectangle" id="option4"> <br>
-        <input type="text" class ="enter-rectangle" id="option5"> <br>
-     
-        <input type="button" class="rectangle-button1" id="proceedToName" value="Let's Decide!">
-        <img id="loading_gif" src="loading_icon.gif" style="display:none">
-        <br> 
+<section>
+  <div class="page">
+    <form class="form" onsubmit="return false;">
+      <div class= "form-row instructions">
+        Need help deciding? <br> Let's create a list.
+      </div>
+      <div class='form-row'>
+          <input class= 'input form-title' id='form-title' type='text' placeholder="Name your list here" />
+      </div>
+      <div class="form-row instructions">
+        Now add your options:
+      </div>
+      <div class="form-row">
+          <input class='input' type='text' id='option1' placeholder="Ex: Pizza">
+        </div>
+        <div class="form-row">
+          <input class='input' type='text' id='option2' placeholder="Ex: Tacos">
+        </div>
+        <div class="form-row">
+          <input class='input' type='text' id='option3' placeholder="Ex: Sushi">
+        </div>
+        <div class="form-row">
+          <input class='input' type='text' id='option4' placeholder="Ex: Burgers">
+        </div>
+        <div class="form-row">
+          <input class='input' type='text' id='option5' placeholder="Ex: Ramen">
+        </div>
+        <div class="form-row">
+        <input type="button" class="button" id="proceedToName" value="Let's decide!">
+        <img id="loading_gif" class="gif" src="loading_icon.gif" style="display:none">
+      </div>
+      
     </form>
   </div>
+</section>
 
-
-
-</body>
-
-</html>
+<footer>
+    
+</footer>

@@ -18,7 +18,7 @@ $(document).ready(function(){
     $(document.getElementById("proceedToName")).hide();
     $(document.getElementById("loading_gif")).show();
 
-    voterListFromUser.name = document.getElementById("titleOfForm").value
+    voterListFromUser.name = document.getElementById("form-title").value
     var optionsArray = [];
     optionsArray.push(document.getElementById("option1").value);
     optionsArray.push(document.getElementById("option2").value);

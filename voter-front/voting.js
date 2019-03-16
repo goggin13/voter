@@ -27,12 +27,12 @@ $(document).ready(function(){
     console.log(data);
     var faceOffs = data["face_offs"];
     var listName = data["name"];
-    $("#enterName").append(" "+listName+"!");
+    $("#enterNameInstructions").append(" "+listName+"!");
     $("#faceOffTitle").append(listName);
     $("#listNameRanking").append(" "+listName+"!");
     if(faceOffs.length == 0) {
       listRankings(data);
-      $(document.getElementById("linkAndNamePage")).hide();
+      $(document.getElementById("nameSection")).hide();
       $(document.getElementById("resultsdiv")).show();
       $(document.getElementById("resultsrank")).show();
 
@@ -45,8 +45,8 @@ $(document).ready(function(){
         else {
           const userName = document.getElementById("userName").value;
           setUserName(userName, function () {
-            $(document.getElementById("linkAndNamePage")).fadeOut();
-            $(document.getElementById("FaceOffSection")).fadeIn("slow");
+            $(document.getElementById("nameSection")).hide();
+            $(document.getElementById("FaceOffSection")).fadeIn();
             faceOffGo(faceOffs);
           });
         };
@@ -111,12 +111,12 @@ function sendWinnersToServer(winner, loser) {
 }
 
 
-function listRankings(data2) {
-  var rankings = data2["rankings"];
+function listRankings(list) {
+  var rankings = list["rankings"];
   setUpLinkSharer("sharableLink2");
   if (Object.keys(rankings).length > 0) {
-    displayResults(data2);
-    pollForListUpdates(data2, function(updated_list) {
+    displayResults(list);
+    pollForListUpdates(list, function(updated_list) {
       $("#headertext1").fadeOut(300).html("Results Updated").fadeIn(300).fadeOut(200).fadeIn(200);
       displayResults(updated_list);
     });
