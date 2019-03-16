@@ -42,9 +42,7 @@ class List < ApplicationRecord
     face_offs_for_user(user).count == required_face_offs
   end
 
-  def rankings(user)
-    return {} unless user_has_completed_voting?(user)
-
+  def rankings
     scoreboard = options.map do |option|
       {
         :option => option,
@@ -52,23 +50,7 @@ class List < ApplicationRecord
       }
     end.sort_by { |record| record[:wins] }.reverse
 
-    rankings = {}
-    previous_wins = nil
-    previous_rank = nil
-    (1..options.length).each do |rank|
-      row = scoreboard.shift
-      if previous_wins && row[:wins] == previous_wins
-        rankings[previous_rank] << row[:option]
-        rankings[previous_rank].sort! { |a,b| a.label.downcase <=> b.label.downcase }
-      else
-        rankings[rank] = [row[:option]]
-        previous_rank = rank
-      end
-
-      previous_wins = row[:wins]
-    end
-
-    rankings
+    _format_rankings(scoreboard)
   end
 
   def face_offs_for_user(user)
@@ -85,6 +67,13 @@ class List < ApplicationRecord
       .where("winner_id in (:option_ids) OR loser_id in (:option_ids)", :option_ids => options.map(&:id))
   end
 
+  def all_users_who_have_completed_voting
+    FaceOff
+      .where("winner_id in (:option_ids) OR loser_id in (:option_ids)", :option_ids => options.map(&:id))
+      .map(&:user)
+      .select { |user| user_has_completed_voting?(user) }
+  end
+
   def narrative
     all_face_offs
       .sort { |a,b| a.user.id <=> b.user.id }
@@ -93,17 +82,54 @@ class List < ApplicationRecord
     end
   end
 
-  def narrative_for_user(user)
-    if user_has_completed_voting?(user)
-      narrative
-    else
-      []
-    end
+  def narrative_for_user
+    narrative
   end
 
-  def completed_voting_count(current_user)
-    return 0 unless user_has_completed_voting?(current_user)
+  def _format_rankings(scoreboard)
+    rankings = {}
+    previous_wins = nil
+    previous_rank = nil
+    (1..options.length).each do |rank|
+      row = scoreboard.shift
+      if previous_wins && row[:wins] == previous_wins
+        rankings[previous_rank] << row[:option].label
+        rankings[previous_rank].sort! { |a,b| a.downcase <=> b.downcase }
+      else
+        rankings[rank] = [row[:option].label]
+        previous_rank = rank
+      end
 
+      previous_wins = row[:wins]
+    end
+
+    rankings
+  end
+
+  def ranking_for_user(user)
+    scoreboard = options.map do |option|
+      {
+        :option => option,
+        :wins => FaceOff.where(
+          :user_id => user.id,
+          :winner_id => option.id
+        ).count
+      }
+    end.sort_by { |record| record[:wins] }.reverse
+
+    _format_rankings(scoreboard)
+  end
+
+  def individual_rankings
+    rankings = {}
+    all_users_who_have_completed_voting.each do |user|
+      rankings[user.name] = ranking_for_user(user)
+    end
+
+    rankings
+  end
+
+  def completed_voting_count
     User
       .find(all_face_offs.map(&:user_id).uniq)
       .select { |user| user_has_completed_voting?(user) }

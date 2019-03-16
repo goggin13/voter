@@ -48,10 +48,10 @@ RSpec.describe List, type: :model do
       FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_3)
       FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
 
-      expect(@list.rankings(@user)).to eq({
-        1 => [@option_1],
-        2 => [@option_2],
-        3 => [@option_3],
+      expect(@list.rankings).to eq({
+        1 => [@option_1.label],
+        2 => [@option_2.label],
+        3 => [@option_3.label],
       })
     end
 
@@ -60,8 +60,8 @@ RSpec.describe List, type: :model do
       FactoryBot.create(:face_off, :user => @user, :winner => @option_3, :loser => @option_1)
       FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
 
-      expect(@list.rankings(@user)).to eq({
-        1 => [@option_1, @option_2, @option_3],
+      expect(@list.rankings).to eq({
+        1 => [@option_1.label, @option_2.label, @option_3.label],
       })
     end
 
@@ -70,10 +70,10 @@ RSpec.describe List, type: :model do
       FactoryBot.create(:face_off, :user => @user, :winner => @option_3, :loser => @option_1)
       FactoryBot.create(:face_off, :user => @user, :winner => @option_3, :loser => @option_2)
 
-      expect(@list.rankings(@user)).to eq({
-        1 => [@option_3],
-        2 => [@option_1],
-        3 => [@option_2],
+      expect(@list.rankings).to eq({
+        1 => [@option_3.label],
+        2 => [@option_1.label],
+        3 => [@option_2.label],
       })
     end
 
@@ -87,9 +87,34 @@ RSpec.describe List, type: :model do
       FactoryBot.create(:face_off, :user => user_2, :winner => @option_3, :loser => @option_1)
       FactoryBot.create(:face_off, :user => user_2, :winner => @option_3, :loser => @option_2)
 
-      expect(@list.rankings(@user)).to eq({
-        1 => [@option_3],
-        2 => [@option_1, @option_2],
+      expect(@list.rankings).to eq({
+        1 => [@option_3.label],
+        2 => [@option_1.label, @option_2.label],
+      })
+    end
+  end
+
+  describe "individual_rankings" do
+    before do
+      @user = FactoryBot.create(:user, :name => "User 1")
+      @list = FactoryBot.create(:list)
+      @option_1 = FactoryBot.create(:option, :list => @list, :label => "Pizza")
+      @option_2 = FactoryBot.create(:option, :list => @list, :label => "Tacos")
+      @option_3 = FactoryBot.create(:option, :list => @list, :label => "Thai")
+    end
+
+    it "returns individual rankings" do
+      other_user = FactoryBot.create(:user, :name => "User 2")
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_2)
+      FactoryBot.create(:face_off, :user => other_user, :winner => @option_1, :loser => @option_2)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_3)
+      FactoryBot.create(:face_off, :user => other_user, :winner => @option_1, :loser => @option_3)
+      FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
+      FactoryBot.create(:face_off, :user => other_user, :winner => @option_2, :loser => @option_3)
+
+      expect(@list.individual_rankings).to eq({
+        "User 1" => {1 => ["Pizza"], 2 => ["Tacos"], 3 => ["Thai"]},
+        "User 2" => {1 => ["Pizza"], 2 => ["Tacos"], 3 => ["Thai"]},
       })
     end
   end
@@ -103,10 +128,6 @@ RSpec.describe List, type: :model do
       @option_3 = FactoryBot.create(:option, :list => @list, :label => "Thai")
     end
 
-    it "returns an empty array when the user has not completed voting" do
-      expect(@list.narrative_for_user(@user)).to eq([])
-    end
-
     it "returns rankings when a user has completed all the face offs" do
       other_user = FactoryBot.create(:user, :name => "User 2")
       FactoryBot.create(:face_off, :user => @user, :winner => @option_1, :loser => @option_2)
@@ -116,7 +137,7 @@ RSpec.describe List, type: :model do
       FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
       FactoryBot.create(:face_off, :user => other_user, :winner => @option_2, :loser => @option_3)
 
-      expect(@list.narrative_for_user(@user)).to eq([
+      expect(@list.narrative_for_user).to eq([
         "User 1 chose Pizza over Tacos",
         "User 1 chose Pizza over Thai",
         "User 1 chose Tacos over Thai",
@@ -143,7 +164,7 @@ RSpec.describe List, type: :model do
       FactoryBot.create(:face_off, :user => @user, :winner => @option_2, :loser => @option_3)
       FactoryBot.create(:face_off, :user => other_user, :winner => @option_2, :loser => @option_3)
 
-      expect(@list.completed_voting_count(@user)).to eq(1)
+      expect(@list.completed_voting_count).to eq(1)
     end
   end
 end

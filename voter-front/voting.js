@@ -127,13 +127,14 @@ function displayResults(list) {
   console.log("displayResults");
   var rankings = list["rankings"];
   var qty_of_winners = Object.keys(rankings["1"]).length;
-  displayNarrative($("#narrative"), list);
+  //displayNarrative($("#narrative"), list);
+  displayIndiviudalRankings($("#narrative"), list);
   $("#voterQty").html("Number of voters: " + list["completed_voting_count"]);
   if (qty_of_winners > 1) {
     $("#result").html("There was a " + qty_of_winners + "-way tie!");
   }
   else {
-   var first_choice = rankings["1"][0]["label"];
+   var first_choice = rankings["1"][0]
    $("#result").html(first_choice);
   }
 
@@ -141,11 +142,9 @@ function displayResults(list) {
   $("#listresults").html("")
   $.each(rankings, function (rank,options){
     var r = rank;
-    $.each(options, function (index, option){
-      var label = option["label"];
+    $.each(options, function (index, label){
       $("#listresults").append("<li>"+label+"</li>");
       $("#resultsrank").append("<li>"+r+"</li>");
     });
   });
 };
-

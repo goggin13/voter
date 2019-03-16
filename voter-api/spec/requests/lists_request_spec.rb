@@ -23,9 +23,9 @@ RSpec.describe "Lists", type: :request do
         expect(parsed_response["face_offs"].length).to eq(0)
 
         expect(parsed_response["rankings"]).to eq({
-          "1" => [JSON.parse(@option_1.to_json)],
-          "2" => [JSON.parse(@option_2.to_json)],
-          "3" => [JSON.parse(@option_3.to_json)],
+          "1" => ["Pizza"],
+          "2" => ["Tacos"],
+          "3" => ["Thai"],
         })
       end
 
@@ -58,6 +58,22 @@ RSpec.describe "Lists", type: :request do
 
         parsed_response = JSON.parse(response.body)
         expect(parsed_response["completed_voting_count"]).to eq(1)
+      end
+
+      it "returns each users individual rankings" do
+        other_user = FactoryBot.create(:user, :name => "User 2")
+        FactoryBot.create(:face_off, :user => other_user, :winner => @option_1, :loser => @option_2)
+        FactoryBot.create(:face_off, :user => other_user, :winner => @option_1, :loser => @option_3)
+        FactoryBot.create(:face_off, :user => other_user, :winner => @option_2, :loser => @option_3)
+
+        get list_path(id: @list.id, :format => :json), :params => {:session_id => @session_id}
+        expect(response).to have_http_status(200)
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response["individual_rankings"]).to eq({
+          @session_id => {"1" => ["Pizza"], "2" => ["Tacos"], "3" => ["Thai"]},
+          "User 2" => {"1" => ["Pizza"], "2" => ["Tacos"], "3" => ["Thai"]},
+        })
       end
     end
   end

@@ -43,7 +43,7 @@ function getList(list_id, callback) {
 function pollForListUpdates(old_list, callback) {
   var poll = function () {
     getList(old_list["id"], function(new_list) {
-      if (old_list["narrative"].length < new_list["narrative"].length) {
+      if (old_list["completed_voting_count"] < new_list["completed_voting_count"]) {
         old_list = new_list;
         callback(new_list);
       }
