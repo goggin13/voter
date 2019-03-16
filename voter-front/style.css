@@ -40,20 +40,28 @@ section {
   border: 3px solid blue;
   padding: 20px 20px;
   padding-bottom: 100px;
+
 }
 
 .form-row{
   padding: 10px;
   border: 3px solid green;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .instructions {
   color: #F36;
   font-family: "Heiti SC";
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 28px;
-  text-align: left; 
+  text-align: center; 
+}
+.instructionsHeader {
+  margin-top: 20px;
 }
 
 
@@ -69,7 +77,6 @@ section {
   text-indent: 10px;
   width : 75%;
   min-width: 150px;
-
 }
 
 ::placeholder {
@@ -91,11 +98,18 @@ section {
   min-width: 70px;
   text-align: center;
   height: 48px;
-  align-self: center;
 }
 
 .name-input {
   margin: 15px;
+}
+
+.face-off {
+  display: inline-block;
+  text-overflow: hidden;
+  white-space: normal;
+  margin: 15px;
+  min-width: 120px;
 }
 
 /*media queries & responsive styling*/
@@ -114,8 +128,7 @@ section {
 }
 
 .enter-name {
-  display: block;
-  flex-wrap: wrap;
+  
 }
 
 }
@@ -143,7 +156,7 @@ section {
 }
 
 .enter-name {
-  display: block;
+
 }
 
 

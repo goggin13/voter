@@ -20,11 +20,11 @@
   <section>
     <div class="page">
 <!--- TO ENTER NAME TO START VOTING-->      
-      <div class=form id=nameSection>
+      <div class="form" id="nameSection">
         <div class="instructions" id="enterNameInstructions">
           No snoozin' while we're choosin'
         </div>
-        <div class="form-row enter-name">
+        <div class="form-row enter-name instructionsHeader">
           <input type="text" class ="input name-input" id="userName" placeholder="Enter your name here">
           <input type="button" class="button start-button" id="listOptionsGo" value="Start">
           </div>
@@ -33,17 +33,19 @@
 <!--- TO VOTE BETWEEN TWO OPTIONS-->
       <div id= "FaceOffSection"  style="display: none;" class="instructions">
           Select one option for each match up
-          <table>
-            <tr>
-              <th> <id="faceOffTitle"> </th>
-            </tr>
-            <tr>
-              <th> <input type="button" class="button faceOff" id="face1" value="option A" onclick=> </th>
-            </tr>
-            <tr>
-              <th> <input type="button" class="button faceOff" id="face2" value="option B"> </th>
-            </tr>
-          </table>
+          <div class="form-row face-off-block instructionsHeader">
+            <table>
+              <tr>
+                <th> <span class="instructions" id="faceOffTitle"> </span> </th>
+              </tr>
+              <tr>
+                <th> <input type="button" class="button face-off" id="face1" value=" option A" onclick=> </th>  
+              </tr> 
+              <tr>  
+                <th> <input type="button" class="button face-off" id="face2" value=" option B"> </th> 
+              </tr>
+            </table>
+          </div>
       </div>
 
 <!--- LAST PAGE, RESULTS, Appears when no more faceoffs-->
@@ -91,7 +93,7 @@
             <inp      ut type="button" id="backtostart" class="rectangle-button1" value="     Start a new list">    
            </div>
         </div>
-    </div>
+    </
 </div>
 </section>
 
