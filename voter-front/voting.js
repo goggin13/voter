@@ -127,8 +127,8 @@ function displayResults(list) {
   console.log("displayResults");
   var rankings = list["rankings"];
   var qty_of_winners = Object.keys(rankings["1"]).length;
-  //displayNarrative($("#narrative"), list);
-  displayIndiviudalRankings($("#narrative"), list);
+  displayNarrative($("#narrative"), list);
+  //displayIndiviudalRankings($("#narrative"), list);
   $("#voterQty").html("Number of voters: " + list["completed_voting_count"]);
   if (qty_of_winners > 1) {
     $("#result").html("There was a " + qty_of_winners + "-way tie!");
