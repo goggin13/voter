@@ -29,12 +29,11 @@ $(document).ready(function(){
     var listName = data["name"];
     $("#enterNameInstructions").append(" "+listName+"!");
     $("#faceOffTitle").append(listName);
-    $("#listNameRanking").append(" "+listName+"!");
+    $(".rank-table-title").append(" "+listName+"!");
     if(faceOffs.length == 0) {
       listRankings(data);
       $(document.getElementById("nameSection")).hide();
-      $(document.getElementById("resultsdiv")).show();
-      $(document.getElementById("resultsrank")).show();
+      $(document.getElementById("resultspage")).show();
 
     }
     else {
@@ -60,7 +59,8 @@ function faceOffGo(faceOffs) {
   if(faceOffs.length == 0) {
     $(document.getElementById('headertext2')).fadeOut();
     $(document.getElementById("FaceOffSection")).fadeOut();
-    $(document.getElementById("resultsdiv")).show();
+    $(document.getElementById("resultspage")).show();
+
   } else {
     let face1 = faceOffs[0][0]["label"];
     let face1id = faceOffs[0][0]["id"];
@@ -114,7 +114,9 @@ function sendWinnersToServer(winner, loser) {
 function listRankings(list) {
   var rankings = list["rankings"];
   setUpLinkSharer("sharableLink2");
-  if (Object.keys(rankings).length > 0) {
+  console.log("RAN?KINGS")
+  console.log(rankings)
+  if (rankings && Object.keys(rankings).length > 0) {
     displayResults(list);
     pollForListUpdates(list, function(updated_list) {
       $("#headertext1").fadeOut(300).html("Results Updated").fadeIn(300).fadeOut(200).fadeIn(200);
@@ -138,13 +140,15 @@ function displayResults(list) {
    $("#result").html(first_choice);
   }
 
-  $("#resultsrank").html("")
-  $("#listresults").html("")
+  //$(".option").html("")
+ // $(".rank").html("")
   $.each(rankings, function (rank,options){
     var r = rank;
     $.each(options, function (index, label){
-      $("#listresults").append("<li>"+label+"</li>");
-      $("#resultsrank").append("<li>"+r+"</li>");
+      $(".rt-option").append("<li>"+label+"</li>");
+      $(".rt-rank").append("<li>"+r+"</li>");
     });
   });
+
+  $(document.getElementById("resultspage")).show();
 };

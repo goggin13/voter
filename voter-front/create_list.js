@@ -29,6 +29,8 @@ $(document).ready(function(){
     optionsArray = optionsArray.filter(Boolean);//making sure it's truthy
     if (optionsArray.length < 2) {
       alert("You must have at least two options");
+      $(document.getElementById("proceedToName")).show();
+      $(document.getElementById("loading_gif")).hide();
       }
     else {
       optionsArray.forEach(function(option) {
