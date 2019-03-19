@@ -12,15 +12,15 @@
 </head>
 
 <body>
-  <header>
+  <header id="header_text">
     DecideKick
   </header>
 
 
   <section>
     <div class="page">
-<!--- TO ENTER NAME TO START VOTING-->      
-      <div class="form" id="nameSection">
+<!--- TO ENTER NAME TO START VOTING-->
+      <div class="form" id="nameSection" style="display: none;" >
         <div class="instructions" id="enterNameInstructions">
           No snoozin' while we're choosin'
         </div>
@@ -28,7 +28,7 @@
           <input type="text" class ="input name-input" id="userName" placeholder="Enter your name here">
           <input type="button" class="button start-button" id="listOptionsGo" value="Start">
           </div>
-      </div>  
+      </div>
 
 <!--- TO VOTE BETWEEN TWO OPTIONS-->
       <div id= "FaceOffSection"  style="display: none;" class="instructions">
@@ -39,10 +39,10 @@
                 <th> <span class="instructions" id="faceOffTitle"> </span> </th>
               </tr>
               <tr>
-                <th> <input type="button" class="button face-off" id="face1" value=" option A" onclick=> </th>  
-              </tr> 
-              <tr>  
-                <th> <input type="button" class="button face-off" id="face2" value=" option B"> </th> 
+                <th> <input type="button" class="button face-off" id="face1" value=" option A" onclick=> </th>
+              </tr>
+              <tr>
+                <th> <input type="button" class="button face-off" id="face2" value=" option B"> </th>
               </tr>
             </table>
           </div>
@@ -62,7 +62,7 @@
               <h3 class="rank-table-title"> Ranked Results for</h3>
             </div>
             <div>
-              <table class="rank-table">  
+              <table class="rank-table">
                 <tr>
                   <th class="rank-table-header">
                     Ranking
@@ -73,12 +73,12 @@
                 </tr>
                 <tr>
                   <td>
-                    <ul class="rank-table-rows rt-rank" style="list-style-type:none"> 
-                     </ul>  
-                  </td> 
-                  <td>  
-                   <ul class="rank-table-rows rt-option" style="list-style-type:none">  
-                   </ul>  
+                    <ul class="rank-table-rows rt-rank" style="list-style-type:none">
+                     </ul>
+                  </td>
+                  <td>
+                   <ul class="rank-table-rows rt-option" style="list-style-type:none">
+                   </ul>
                   </td>
                 </tr>
               </table>
@@ -90,7 +90,7 @@
 
 
 <footer>
-    
+
 </footer>
 
 </body>

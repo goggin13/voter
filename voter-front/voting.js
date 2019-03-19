@@ -24,7 +24,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   getList(list_id, function(data,status) {
-    console.log(data);
     var faceOffs = data["face_offs"];
     var listName = data["name"];
     $("#enterNameInstructions").append(" "+listName+"!");
@@ -33,15 +32,13 @@ $(document).ready(function(){
     if(faceOffs.length == 0) {
       listRankings(data);
       $(document.getElementById("nameSection")).hide();
-      $(document.getElementById("resultspage")).show();
-
     }
     else {
+      $(document.getElementById("nameSection")).show();
       $("#listOptionsGo").click(function(){
         if($('#userName').val() == ''){
           alert('You must enter a name');
-        }
-        else {
+        } else {
           const userName = document.getElementById("userName").value;
           setUserName(userName, function () {
             $(document.getElementById("nameSection")).hide();
@@ -59,8 +56,6 @@ function faceOffGo(faceOffs) {
   if(faceOffs.length == 0) {
     $(document.getElementById('headertext2')).fadeOut();
     $(document.getElementById("FaceOffSection")).fadeOut();
-    $(document.getElementById("resultspage")).show();
-
   } else {
     let face1 = faceOffs[0][0]["label"];
     let face1id = faceOffs[0][0]["id"];
@@ -114,23 +109,19 @@ function sendWinnersToServer(winner, loser) {
 function listRankings(list) {
   var rankings = list["rankings"];
   setUpLinkSharer("sharableLink2");
-  console.log("RAN?KINGS")
-  console.log(rankings)
   if (rankings && Object.keys(rankings).length > 0) {
     displayResults(list);
     pollForListUpdates(list, function(updated_list) {
-      $("#headertext1").fadeOut(300).html("Results Updated").fadeIn(300).fadeOut(200).fadeIn(200);
+      $("#header_text").fadeOut(300).html("Results Updated").fadeIn(300).fadeOut(200).fadeIn(200)
       displayResults(updated_list);
     });
   };
 }
 
 function displayResults(list) {
-  console.log("displayResults");
   var rankings = list["rankings"];
   var qty_of_winners = Object.keys(rankings["1"]).length;
-  displayNarrative($("#narrative"), list);
-  //displayIndiviudalRankings($("#narrative"), list);
+
   $("#voterQty").html("Number of voters: " + list["completed_voting_count"]);
   if (qty_of_winners > 1) {
     $("#result").html("There was a " + qty_of_winners + "-way tie!");
@@ -140,8 +131,8 @@ function displayResults(list) {
    $("#result").html(first_choice);
   }
 
-  //$(".option").html("")
- // $(".rank").html("")
+  $(".rt-option").html("");
+  $(".rt-rank").html("");
   $.each(rankings, function (rank,options){
     var r = rank;
     $.each(options, function (index, label){
@@ -150,5 +141,5 @@ function displayResults(list) {
     });
   });
 
-  $(document.getElementById("resultspage")).show();
+  $(document.getElementById("resultsdiv")).show();
 };
