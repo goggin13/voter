@@ -41,11 +41,17 @@ list_params = {
 list = curl("POST", "lists.json", SESSION_ID_1, list_params)
 puts JSON.pretty_generate(list)
 
+puts "## Kelly links her name"
+vote = curl("POST", "users/link.json", SESSION_ID_1, { :name => "Kelly" })
+
+puts "## Matt links his name"
+vote = curl("POST", "users/link.json", SESSION_ID_2, { :name => "Matt" })
+
 puts "## Kelly votes"
 list["face_offs"].each do |pair|
   winner_id, loser_id = [pair[0]["id"], pair[1]["id"]].shuffle
 
-  vote = curl("POST", "/face_offs.json", SESSION_ID_1, {
+  vote = curl("POST", "/lists/#{list["id"]}/face_offs.json", SESSION_ID_1, {
     :winner_id => winner_id,
     :loser_id => loser_id,
   })
@@ -56,7 +62,7 @@ puts "## Matt votes"
 list["face_offs"].each do |pair|
   winner_id, loser_id = [pair[0]["id"], pair[1]["id"]].shuffle
 
-  vote = curl("POST", "/face_offs.json", SESSION_ID_2, {
+  vote = curl("POST", "/lists/#{list["id"]}/face_offs.json", SESSION_ID_2, {
     :winner_id => winner_id,
     :loser_id => loser_id,
   })
