@@ -89,12 +89,12 @@ function setWinner(face1id, face2id, face_offs) {
 };
 
 function sendWinnersToServer(winner, loser, callback) {
-  const faceoffurl = "face_offs.json";
+  const faceoffurl = "lists/" + list_id + "/face_offs.json";
   const payload = {
     face_off : {
       winner_id : winner,
       loser_id : loser
-    },
+    }
   }
   $post(faceoffurl, payload, callback);
 }

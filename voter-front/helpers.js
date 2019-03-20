@@ -1,6 +1,6 @@
 var HOST = "https://agile-ridge-67293.herokuapp.com";
 var POLL_TIMEOUT = 5000;
-// var HOST = "http://localhost:3000"
+var HOST = "http://localhost:3000"
 
 function getUrlVars() {
   var vars = {};
@@ -11,7 +11,7 @@ function getUrlVars() {
 }
 
 function heartbeat(){
-  $get("lists/585.json", function(data) { });
+  $get("heartbeat", function(data) { });
 }
 
 function getListId() {

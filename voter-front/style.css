@@ -30,14 +30,12 @@ footer {
 
 section {
   display: flex;
-  border: 3px solid red;
   justify-content: center;
   align-content: center;
 }
 
 .page {
   width: 80%;
-  border: 3px solid blue;
   padding: 20px 20px;
   padding-bottom: 100px;
 
@@ -45,7 +43,6 @@ section {
 
 .form-row{
   padding: 10px;
-  border: 3px solid green;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -121,17 +118,11 @@ section {
 h1 {
   padding: 10px;
   font-size: 30px;
-  border: solid 3px #F36;
-}
-
-.results-announce {
-  border: 3px solid yellow;
 }
 
 .results-table {
   margin: 20px;
   padding: 10px;
-  border: 3px solid green;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,7 +131,6 @@ h1 {
 
 .rank-table {
   display: inline-block;
-  border: 3px solid orange;
   font-family: "Heiti SC";
   min-width: 150px;
   margin: 20px;
@@ -314,9 +304,10 @@ font-family: "Heiti SC";
   margin: 10px;
 }
 
-#slow_server_response {
-  border-radius: 6px;
-
-}
-
-*/
+/* .form-row { border: 3px solid green; } 
+.results-announce { border: 3px solid yellow; }
+section { border: 3px solid red; }
+.page { border: 3px solid blue; }
+.results-table { border: 3px solid green; }
+h1 { border: solid 3px #F36; }
+.rank-table { border: 3px solid orange; } */

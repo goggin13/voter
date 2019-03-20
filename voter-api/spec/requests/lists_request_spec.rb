@@ -163,10 +163,11 @@ RSpec.describe "Lists", type: :request do
         winner_id = parsed_response["options"][0]["id"]
         loser_id = parsed_response["options"][1]["id"]
 
-        post face_offs_path(:format => :json), :params => {
+        post list_face_offs_path(list_id: list_id, :format => :json), :params => {
           :face_off => {
             :winner_id => winner_id,
             :loser_id => loser_id,
+            :list_id => list_id,
           },
           :session_id => session_id
         }

@@ -28,7 +28,7 @@ class FaceOffsController < ApplicationController
 
     respond_to do |format|
       if @face_off.save
-        format.json { render :show, status: :created, location: @face_off }
+        format.json { render json: @face_off, status: :created }
       else
         format.json { render json: @face_off.errors, status: :unprocessable_entity }
       end
@@ -67,9 +67,11 @@ class FaceOffsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def face_off_params
+      list = List.find(params[:list_id])
       params
         .require(:face_off)
         .permit(:loser_id, :winner_id)
         .merge(:user_id => current_user.id)
+        .merge(:list_id => list.id)
     end
 end

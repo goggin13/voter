@@ -28,7 +28,7 @@ class List < ApplicationRecord
     #      e.g. [Option("tacos"), Option("Pizza")]
 
     all_possible_combinations.reject do |option_pair|
-      option_pair_ids = option_pair.map { |obj| obj.id }.sort
+      option_pair_ids = option_pair.map { |option| option.id }.sort
       # option_pair_ids
       #   [1, 3]
       face_off_id_pairs.include?(option_pair_ids)
@@ -54,22 +54,19 @@ class List < ApplicationRecord
   end
 
   def face_offs_for_user(user)
-    option_ids = options.map(&:id)
-    FaceOff.where(
-      :user_id => user.id,
-      :loser_id => option_ids,
-      :winner_id => option_ids
-    )
+    FaceOff.where(:user_id => user.id, :list_id => id)
   end
 
   def all_face_offs
-    FaceOff
-      .where("winner_id in (:option_ids) OR loser_id in (:option_ids)", :option_ids => options.map(&:id))
+    return @_all_face_offs if defined?(@_all_face_offs)
+
+    @_all_face_offs = FaceOff.where(:list_id => id)
+
+    @_all_face_offs
   end
 
   def all_users_who_have_completed_voting
-    FaceOff
-      .where("winner_id in (:option_ids) OR loser_id in (:option_ids)", :option_ids => options.map(&:id))
+    all_face_offs
       .map(&:user)
       .select { |user| user_has_completed_voting?(user) }
   end

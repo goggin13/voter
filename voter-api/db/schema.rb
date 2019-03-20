@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_011725) do
+ActiveRecord::Schema.define(version: 2019_03_20_013220) do
 
   create_table "face_offs", force: :cascade do |t|
     t.integer "loser_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_011725) do
     t.integer "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "list_id"
   end
 
   create_table "lists", force: :cascade do |t|

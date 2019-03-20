@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   before_action :cors_preflight_check
   after_action :cors_set_access_control_headers
 
+  def heartbeat
+    render json: {}
+  end
+
   def set_session_id
     @session_id = cookies[:session_id] || params[:session_id]
     if @session_id.nil?
@@ -31,7 +35,7 @@ class ApplicationController < ActionController::Base
     headers["Access-Control-Allow-Methods"] = "POST, PUT, DELETE, GET, OPTIONS"
     headers["Access-Control-Allow-Headers"] = "*"
     headers["Access-Control-Max-Age"] = "1728000"
-    headers["Access-Control-Allow-Credentials"] = true
+    headers["Access-Control-Allow-Credentials"] = "true"
   end
 
   def cors_preflight_check
