@@ -11,7 +11,7 @@ function getUrlVars() {
 }
 
 function heartbeat(){
-  $get("lists.json", function(data) { });
+  $get("lists/585.json", function(data) { });
 }
 
 function getListId() {

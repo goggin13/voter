@@ -48,48 +48,47 @@ $(document).ready(function(){
         };
       });
     };
-  }, 'json');
+  });
 });
 
 
 function faceOffGo(faceOffs) {
-  if(faceOffs.length == 0) {
-    $(document.getElementById('headertext2')).fadeOut();
-    $(document.getElementById("FaceOffSection")).fadeOut();
-  } else {
-    let face1 = faceOffs[0][0]["label"];
-    let face1id = faceOffs[0][0]["id"];
-    var face1Button = document.getElementById('face1');
-    face1Button.value = face1;
-    let face2 = faceOffs[0][1]["label"];
-    let face2id = faceOffs[0][1]["id"];
-    var face2Button = document.getElementById('face2');
-    face2Button.value = face2;
+  let face1 = faceOffs[0][0]["label"];
+  let face1id = faceOffs[0][0]["id"];
+  var face1Button = document.getElementById('face1');
+  face1Button.value = face1;
+  let face2 = faceOffs[0][1]["label"];
+  let face2id = faceOffs[0][1]["id"];
+  var face2Button = document.getElementById('face2');
+  face2Button.value = face2;
 
-    $(face1Button).off();
-    $(face1Button).on("click", function listen1() {
-      setWinner(face1id,face2id,faceOffs);
-    });
-    $(face2Button).off();
-    $(face2Button).on("click", function listen2() {
-      setWinner(face2id,face1id,faceOffs);
-     });
-  }    //end else statement
+  $(face1Button).off();
+  $(face1Button).on("click", function listen1() {
+    setWinner(face1id,face2id,faceOffs);
+  });
+  $(face2Button).off();
+  $(face2Button).on("click", function listen2() {
+    setWinner(face2id,face1id,faceOffs);
+   });
 };  // end faceOffGo function
 
 
-
-function setWinner(face1id, face2id, face_array) {
-  sendWinnersToServer(face1id, face2id);
-  removeFaceOff(face_array);
-  faceOffGo(face_array);
+function setWinner(face1id, face2id, face_offs) {
+  sendWinnersToServer(face1id, face2id, function () {
+    face_offs.shift();
+    if (face_offs.length > 0) {
+      faceOffGo(face_offs);
+    } else {
+      $(document.getElementById('headertext2')).hide();
+      $(document.getElementById("FaceOffSection")).hide();
+      getList(list_id, function(list, status) {
+        listRankings(list);
+      });
+    }
+  });
 };
 
-function removeFaceOff(face_array) {
-  face_array.shift();
-}
-
-function sendWinnersToServer(winner, loser) {
+function sendWinnersToServer(winner, loser, callback) {
   const faceoffurl = "face_offs.json";
   const payload = {
     face_off : {
@@ -97,12 +96,7 @@ function sendWinnersToServer(winner, loser) {
       loser_id : loser
     },
   }
-  $post(faceoffurl, payload, function(data,status) {
-    getList(list_id, function(data2,status) {
-      listRankings(data2);
-    });
-  }, 'json');
-
+  $post(faceoffurl, payload, callback);
 }
 
 
