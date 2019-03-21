@@ -141,14 +141,10 @@ function displayResults(list) {
     console.log(individual_rankings);
     console.log(Object.keys(list["individual_rankings"]).length);
     $.each(individual_rankings, function (userName, rankings) {
-      var n = 1
-      var newTable = $(".results-table").clone().addClass("indiv" + userName);
+      var newTable = $("#original-table").clone()
       console.log(userName);
-      console.log(newTable);
-     // var newClass = $(newTable).attr("class").split(' ').pop();
-      $(".indiv"+ userName).appendTo("results-announce");
-      $(newTable).find(".indiv" + userName +" .rank-table-title").html("");
-      $(newTable).find(".indiv" + userName +" .rank-table-title").html(userName);
+      newTable.appendTo(".results-announce");
+      newTable.find(".rank-table-title").html(userName);
       //$(newTable).appendTo(".results-announce");
       //$(newTable).find(".rank-table-title").html("");
       //$(newTable).find(".rank-table-title").html(userName + n);
