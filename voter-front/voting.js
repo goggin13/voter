@@ -3,12 +3,12 @@ var list_id = getListId();
 
 function setUpLinkSharer (id) {
   var windowlink = window.location.href;
-  $(".sharableLink").val(windowlink);
-  $(".linkButton").click(function(){
+  $("#sharableLink").val(windowlink);
+  $(".share").click(function(){
     var copyText = document.getElementById(id);
     copyText.select();
     document.execCommand("copy");
-    $(".copyLink").val("Copied!");
+    $("#copyLink").val("URL Copied!");
   });
 }
 
