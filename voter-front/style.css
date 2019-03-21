@@ -11,10 +11,16 @@ header {
   font-family: "Heiti SC";
   color: #FFF;
   font-size: 30px;
-  padding-top: 15px;
-  padding-bottom: 10px;
+  padding: 15px;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  }
 
+.header_buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 
@@ -103,6 +109,7 @@ section {
   height: 48px;
 }
 
+
 .name-input {
   margin: 15px;
 }
@@ -114,6 +121,21 @@ section {
   margin: 15px;
   min-width: 120px;
 }
+
+.startover {
+  font-size: 12px;
+  padding: 8px;
+  margin: 5px;
+}
+
+.share {
+  font-size: 12px;
+  padding: 8px;
+  margin: 5px;
+
+}
+
+
 
 h1 {
   padding: 10px;
@@ -127,6 +149,7 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border: 3px solid green;
 }
 
 .rank-table {
@@ -134,13 +157,16 @@ h1 {
   font-family: "Heiti SC";
   min-width: 150px;
   margin: 20px;
+  border: 1px solid #F36;
+  border-collapse: collapse;
+
 }
 
 .rank-table-header {
   background-color: #F36;
   color: #FFF;
-  padding: 10px;
   font-size: 20px;
+  padding: 5px;
 }
 
 
@@ -148,9 +174,27 @@ h1 {
   color: #F36;
   border-spacing: 20px;
   text-align: center;
-  font-size: 16px;
+  padding: 3px;
+  font-size: 18px;
   line-height: 20px;
 }
+
+li {
+  border: 1px solid #F36;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.test {
+  color: green;
+  font-size: 30px;
+}
+
+.indiv {
+
+}
+
 
 /*media queries & responsive styling*/
 /* Mobile Styles */
@@ -167,8 +211,9 @@ h1 {
   font-size: 18px;
 }
 
-.enter-name {
-  
+.header_buttons {
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 }
@@ -195,9 +240,6 @@ section {
   font-size: 18px;
 }
 
-.enter-name {
-
-}
 
 
 
@@ -308,6 +350,7 @@ font-family: "Heiti SC";
 .results-announce { border: 3px solid yellow; }
 section { border: 3px solid red; }
 .page { border: 3px solid blue; }
-.results-table { border: 3px solid green; }
+.results-table { 
+ }
 h1 { border: solid 3px #F36; }
 .rank-table { border: 3px solid orange; } */

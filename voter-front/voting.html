@@ -12,8 +12,13 @@
 </head>
 
 <body>
-  <header id="header_text">
+  <header>
+    <div id="header_text" class="header">
     DecideKick
+    </div>
+    <div class=header_buttons>
+    <input type="button" id="backtostart" class="button startover" value="Start a new list">
+    <input type="button" id="sharethislink" class="button share" value="Share & Get input">
   </header>
 
 
@@ -55,8 +60,9 @@
             And the winner is...
           </div>
           <div class="instructions">
-            <h1 id="result"> Oops! No result </h1>
+            <h1 id="result" class="oops"> Oops! No result </h1>
           </div>
+
           <div class="results-table">
             <div>
               <h3 class="rank-table-title"> Ranked Results for</h3>
@@ -83,7 +89,15 @@
                 </tr>
               </table>
             </div>
-         </div>
+          </div>
+          <div class="voterQty instructions">
+            <p> Number of voters: </p>
+          </div>
+
+
+
+
+
       </div>
     </div>
   </section>

@@ -116,7 +116,8 @@ function displayResults(list) {
   var rankings = list["rankings"];
   var qty_of_winners = Object.keys(rankings["1"]).length;
 
-  $("#voterQty").html("Number of voters: " + list["completed_voting_count"]);
+  $(".voterQty").html("");
+  $(".voterQty").append("Number of Voters: " + list["completed_voting_count"]);
   if (qty_of_winners > 1) {
     $("#result").html("There was a " + qty_of_winners + "-way tie!");
   }
@@ -127,7 +128,7 @@ function displayResults(list) {
 
   $(".rt-option").html("");
   $(".rt-rank").html("");
-  $.each(rankings, function (rank,options){
+  $.each(rankings, function (rank,options) {
     var r = rank;
     $.each(options, function (index, label){
       $(".rt-option").append("<li>"+label+"</li>");
@@ -135,5 +136,38 @@ function displayResults(list) {
     });
   });
 
+  if (list["completed_voting_count"] > 1) {
+    var individual_rankings = list["individual_rankings"];
+    console.log(individual_rankings);
+    console.log(Object.keys(list["individual_rankings"]).length);
+    $.each(individual_rankings, function (userName, rankings) {
+      var n = 1
+      var newTable = $(".results-table").clone().addClass("indiv" + userName);
+      console.log(userName);
+      console.log(newTable);
+     // var newClass = $(newTable).attr("class").split(' ').pop();
+      $(".indiv"+ userName).appendTo("results-announce");
+      $(newTable).find(".indiv" + userName +" .rank-table-title").html("");
+      $(newTable).find(".indiv" + userName +" .rank-table-title").html(userName);
+      //$(newTable).appendTo(".results-announce");
+      //$(newTable).find(".rank-table-title").html("");
+      //$(newTable).find(".rank-table-title").html(userName + n);
+
+      /*
+      console.log(userName);
+      $.each(rankings, function (rank, options) {
+        var r = rank;
+        $.each(options, function (index, label) {
+          console.log(r);
+          console.log(label);
+          console.log(n);
+          $(newTable).find(".rt-option").html("");
+          $(newTable).find(".rt-rank").html(""); 
+          $(newTable).find(".rt-option").append("<li>"+label+"</li>");
+          $(newTable).find(".rt-rank").append("<li>"+r+"</li>");
+        });
+      });*/
+    });
+  }
   $(document.getElementById("resultsdiv")).show();
 };
