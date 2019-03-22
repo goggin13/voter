@@ -19,6 +19,12 @@ header {
   align-items: center;
   }
 
+  .header-intro {
+    font-size: 20px;
+    padding-right: 5px;
+    text-align: right;
+  }
+
 
 footer {
   background-color: #F36;
@@ -248,6 +254,9 @@ header, footer, section {
   justify-content: space-between;
 }
 
+.header-intro {
+  min-width: 60%;
+}
 
 .indiv {
   width: 42%;
