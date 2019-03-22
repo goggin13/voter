@@ -10,18 +10,14 @@ header {
   background-color: #F36;
   font-family: "Heiti SC";
   color: #FFF;
-  font-size: 30px;
+  min-height: 70px;
+  font-size: 36px;
   padding: 15px;
   text-align: center;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   }
-
-.header_buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
 
 
 footer {
@@ -122,17 +118,16 @@ section {
   min-width: 120px;
 }
 
-.startover {
-  font-size: 12px;
-  padding: 8px;
-  margin: 5px;
+.header_buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.share {
+.startover, .share {
   font-size: 12px;
   padding: 8px;
   margin: 5px;
-
 }
 
 
@@ -142,63 +137,100 @@ h1 {
   font-size: 30px;
 }
 
+.results-announce{
+  display: flex;
+  flex-direction: column;
+}
+
 .results-table {
   margin: 20px;
-  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 3px solid green;
 }
 
 .rank-table {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Heiti SC";
   min-width: 150px;
-  margin: 20px;
+  margin: 5px;
   border: 1px solid #F36;
   border-collapse: collapse;
+  text-align: center;
 
 }
 
 .rank-table-header {
   background-color: #F36;
   color: #FFF;
-  font-size: 20px;
-  padding: 5px;
+  font-size: 16px;
+  padding: 8px;
+  text-align: left;
 }
 
 
 .rank-table-rows {
   color: #F36;
   border-spacing: 20px;
-  text-align: center;
-  padding: 3px;
+  text-align: left;
+  padding: 5px;
   font-size: 18px;
   line-height: 20px;
+  border-collapse: collapse;
 }
+
+.rank-table-title {
+  display: inline-block;
+  padding: 5px;
+  font-size: 20px;
+  line-height: normal;
+}
+
 
 li {
   border: 1px solid #F36;
+  border-collapse: collapse;
   padding: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.test {
-  color: green;
-  font-size: 30px;
+.indiv-results-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+
 }
 
-.indiv {
 
+
+
+.break {
+  font-size: 20px;
+  padding: 5px;
+  font-weight: 500;
+}
+
+hr {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #F36;
+  margin-bottom: 20px;
 }
 
 
 /*media queries & responsive styling*/
 /* Mobile Styles */
 @media only screen and (max-width: 430px) {
+
+header, footer, section {
+  min-width: 300px
+}
 
 }
 
@@ -214,6 +246,12 @@ li {
 .header_buttons {
   flex-direction: row;
   justify-content: space-between;
+}
+
+
+.indiv {
+  width: 42%;
+  align-content: left;
 }
 
 }
@@ -239,7 +277,13 @@ section {
 ::placeholder {
   font-size: 18px;
 }
-
+.indiv-results-display {
+  justify-content: space-between;
+}
+.indiv {
+  width: 20%;
+  align-items: left;
+}
 
 
 

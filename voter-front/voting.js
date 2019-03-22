@@ -141,28 +141,22 @@ function displayResults(list) {
     console.log(individual_rankings);
     console.log(Object.keys(list["individual_rankings"]).length);
     $.each(individual_rankings, function (userName, rankings) {
-      var newTable = $("#original-table").clone()
+      var newTable = $("#original-table").clone().addClass("indiv");
       console.log(userName);
-      newTable.appendTo(".results-announce");
+      newTable.appendTo(".indiv-results-display");
+      newTable.find(".rank-table-title").html("");
+      newTable.find(".rt-option").html("");
+      newTable.find(".rt-rank").html("");
       newTable.find(".rank-table-title").html(userName);
-      //$(newTable).appendTo(".results-announce");
-      //$(newTable).find(".rank-table-title").html("");
-      //$(newTable).find(".rank-table-title").html(userName + n);
-
-      /*
-      console.log(userName);
       $.each(rankings, function (rank, options) {
-        var r = rank;
-        $.each(options, function (index, label) {
-          console.log(r);
-          console.log(label);
-          console.log(n);
-          $(newTable).find(".rt-option").html("");
-          $(newTable).find(".rt-rank").html(""); 
-          $(newTable).find(".rt-option").append("<li>"+label+"</li>");
-          $(newTable).find(".rt-rank").append("<li>"+r+"</li>");
+        var ri = rank;
+        $.each(options, function (index, labeli) {
+          console.log(ri);
+          console.log(labeli);
+          newTable.find(".rt-option").append("<li>"+labeli+"</li>");
+          newTable.find(".rt-rank").append("<li>"+ri+"</li>");
         });
-      });*/
+      });
     });
   }
   $(document.getElementById("resultsdiv")).show();
