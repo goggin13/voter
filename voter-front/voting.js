@@ -79,7 +79,6 @@ function setWinner(face1id, face2id, face_offs) {
     if (face_offs.length > 0) {
       faceOffGo(face_offs);
     } else {
-      $(document.getElementById('headertext2')).hide();
       $(document.getElementById("FaceOffSection")).hide();
       getList(list_id, function(list, status) {
         listRankings(list);
@@ -137,6 +136,7 @@ function displayResults(list) {
   });
 
   if (list["completed_voting_count"] > 1) {
+    //$(".indiv-results-header").show();
     var individual_rankings = list["individual_rankings"];
     console.log(individual_rankings);
     console.log(Object.keys(list["individual_rankings"]).length);

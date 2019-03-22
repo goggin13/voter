@@ -124,6 +124,25 @@ section {
   min-width: 120px;
 }
 
+#progress {
+  display: block;
+  margin-top: 40px;
+  width: 250px;
+  background-color: grey;
+  color: #FFF;
+  text-align: left;
+}
+
+#my-bar {
+  display: block;
+  padding: 8px;
+  font-size: 16px;
+  width: 10%;
+  height: 30px;
+  background-color: #F36;
+  color: #FFF;
+}
+
 .header_buttons {
   display: flex;
   flex-direction: column;
@@ -160,12 +179,12 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   font-family: "Heiti SC";
-  min-width: 150px;
   margin: 5px;
   border: 1px solid #F36;
   border-collapse: collapse;
-  text-align: center;
+
 
 }
 
@@ -193,7 +212,17 @@ h1 {
   padding: 5px;
   font-size: 20px;
   line-height: normal;
+  text-align: center;
+
+
 }
+
+/*.rank-table-toprow {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  flex-wrap: wrap;
+  }*/
 
 
 li {

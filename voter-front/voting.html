@@ -21,6 +21,7 @@
 
     <input type="button" id="copyLink" class="button share" value="Share URL & Get input">
     <input type="text" style="display:none" id="sharableLink">
+    </div>
   </header>
 
 
@@ -51,6 +52,15 @@
               <tr>
                 <th> <input type="button" class="button face-off" id="face2" value=" option B"> </th>
               </tr>
+              <tr>
+                <th> 
+                  <div id="progress" class="face-off">  
+                    <div id="my-bar"> Progress
+                    </div>
+                  </div> 
+                </th>
+              </tr>
+
             </table>
           </div>
       </div>
@@ -69,7 +79,7 @@
     
             <div>
               <table class="rank-table">
-                <tr class="rank-table-rows rank-table-title"> Ranked Results for
+                <tr class="rank-table-rows rank-table-title"> Ranked Results for <br>
                 </tr>
                 <tr>
                   <th class="rank-table-header">
@@ -95,7 +105,7 @@
           <div class="break">
             <hr class="hr">
             <p class="voterQty"> Number of voters: </p> 
-            <h3> Individual Results: </h3>
+            <h3 class="indiv-results-header"> Individual Results: </h3>
           </div>
           <div class="indiv-results-display">
           </div>
