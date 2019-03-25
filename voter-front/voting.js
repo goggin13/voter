@@ -151,7 +151,7 @@ function displayResults(list) {
   });
 
   if (list["completed_voting_count"] > 1) {
-    //$(".indiv-results-header").show();
+    $(".indiv-results-display").html("");
     var individual_rankings = list["individual_rankings"];
     console.log(individual_rankings);
     console.log(Object.keys(list["individual_rankings"]).length);
