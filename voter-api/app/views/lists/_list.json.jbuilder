@@ -4,8 +4,8 @@ json.options(list.options) do |option|
   json.label option.label
   json.id option.id
 end
-json.face_offs(list.remaining_face_offs(@current_user)) do |option_pair|
-  json.array! option_pair.map do |option|
+json.face_offs(list.remaining_face_offs(@current_user).shuffle) do |option_pair|
+  json.array! option_pair.shuffle.map do |option|
     json.id option.id
     json.label option.label
   end

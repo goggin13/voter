@@ -139,8 +139,14 @@ RSpec.describe "Lists", type: :request do
             {"label" => "option 2", "id" => option_2.id},
             {"label" => "option 3", "id" => option_3.id},
           ],
-        ]
-        expect(parsed_response["face_offs"]).to eq(expected)
+        ].map { |pair| [pair[0]["id"], pair[1]["id"]].sort }
+
+        actual = parsed_response["face_offs"].map do |pair|
+          [pair[0]["id"], pair[1]["id"]].sort
+        end
+        expect(actual).to include(expected[0])
+        expect(actual).to include(expected[1])
+        expect(actual).to include(expected[2])
       end
 
       it "doesn't return already completed faceoffs" do
