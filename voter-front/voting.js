@@ -62,30 +62,26 @@ function faceOffGo(faceOffs) {
   let face2id = faceOffs[0][1]["id"];
   var face2Button = document.getElementById('face2');
   face2Button.value = face2;
-  var length = faceOffs.length;
 
   $(face1Button).off();
   $(face1Button).on("click", function listen1() {
     setWinner(face1id,face2id,faceOffs);
-    var newwidth = progression(length);
-    $("#my-bar").width(newwidth); 
+    setProgress(faceOffs.length);
   });
   $(face2Button).off();
   $(face2Button).on("click", function listen2() {
     setWinner(face2id,face1id,faceOffs);
-    var newwidth = progression(length);
-    $("#my-bar").width(newwidth);
+    setProgress(faceOffs.length);
    });
 };  // end faceOffGo function
 
-function progression(length) {
-  var fo_length = length; //faceOffs.length - parameter is actually faceOffs object;
+function setProgress(numberOfFaceOffsLeft) {
   var totalwidth = $("#progress").width();
   var progresswidth = $("#my-bar").width();
   var remainingwidth = totalwidth - progresswidth;
-  var increment = remainingwidth/fo_length;
+  var increment = remainingwidth/numberOfFaceOffsLeft;
   var newwidth = progresswidth + increment;
-  return newwidth;
+  $("#my-bar").width(newwidth); 
 }
 
 function setWinner(face1id, face2id, face_offs) {
