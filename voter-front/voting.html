@@ -16,12 +16,17 @@
     <div id="header_text" class="header">
     DecideKick
     </div>
-    <div class=header_buttons>
-    <input type="button" id="backtostart" class="button startover" value="Start a new list">
+      <div class="header-buttons">
+        <div>
+          <input type="button" id="backtostart" class=" button startover" value="Start a new list">
+        </div>
 
-    <input type="button" id="copyLink" class="button share" value="Share URL & Get input">
-    <input type="text" style="display:none" id="sharableLink">
-    </div>
+        <div class="share-container"> 
+          <input type="button" id="copyLink" class="button  share" value="Copy URL & Get input">
+          <input class="input link-input" type="text" id="sharableLink">
+        </div>
+      </div>
+      
   </header>
 
 
@@ -81,7 +86,7 @@
               <table class="rank-table">
                 <tr class="rank-table-rows rank-table-title"> Ranked Results for <br>
                 </tr>
-                <tr>
+                <tr> 
                   <th class="rank-table-header">
                     Ranking
                   </th>
@@ -102,6 +107,7 @@
               </table>
             </div>
           </div>
+          
           <div class="break">
             <hr class="hr">
             <p class="voterQty"> Number of voters: </p> 

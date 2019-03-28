@@ -11,12 +11,15 @@ header {
   font-family: "Heiti SC";
   color: #FFF;
   min-height: 70px;
-  font-size: 36px;
-  padding: 15px;
+  font-size: 28px;
+  padding: 5px;
+  padding-top: 10px;
   text-align: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  /*border: 3px solid blue;*/
+
   }
 
   .header-intro {
@@ -24,6 +27,15 @@ header {
     padding-right: 5px;
     text-align: right;
   }
+
+  .share-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    /*border: 3px solid green;*/
+  }
+
+
 
 
 footer {
@@ -90,6 +102,18 @@ section {
   min-width: 150px;
 }
 
+.link-input {
+  font-size: 10px;
+  line-height: 12px;
+  text-indent: 0px;
+  color: #FFF; 
+  background-color: #F36;
+  background: transparent;
+  border: 1px dotted #FFF; 
+  padding: 5px;
+  width: 100%;
+}
+
 ::placeholder {
   font-size: 14px;
 }
@@ -109,6 +133,27 @@ section {
   min-width: 70px;
   text-align: center;
   height: 48px;
+}
+
+  .header-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  min-width: 0;
+ /* border: 3px solid orange;*/
+
+
+}
+
+.startover, .share {
+  font-size: 10px;
+  padding: 8px;
+  margin: 5px;
+}
+
+.startover {
+  margin-bottom: 0;
 }
 
 
@@ -143,17 +188,7 @@ section {
   color: #FFF;
 }
 
-.header_buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
 
-.startover, .share {
-  font-size: 12px;
-  padding: 8px;
-  margin: 5px;
-}
 
 
 
@@ -264,7 +299,7 @@ hr {
 @media only screen and (max-width: 430px) {
 
 header, footer, section {
-  min-width: 300px
+  min-width: 300px;
 }
 
 }
@@ -278,7 +313,10 @@ header, footer, section {
   font-size: 18px;
 }
 
-.header_buttons {
+header {
+  align-items: center;
+}
+.header-buttons {
   flex-direction: row;
   justify-content: space-between;
 }
@@ -292,19 +330,23 @@ header, footer, section {
   align-content: left;
 }
 
+.startover, .share {
+  font-size: 12px;
+}
 }
 
 /* Desktop Styles */
 @media only screen and (min-width: 901px) {
 
 header {
-  width : 900px;
+  width : 1100px;
+  align-items: center;
 }
 footer {
-  width: 900px;
+  width: 1100px;
 }
 section {
-  width: 900px;
+  width: 1100px;
 }
 .page {
   width:720px;
@@ -323,111 +365,40 @@ section {
   align-items: left;
 }
 
-
-
-/* OLD CSS 
-h1 {
-font-family: "Heiti SC";
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-}
-
-body {
-width: 100%;
-margin: 5%;
-padding: 5%;
-min-height: 100%;
-font-family: "Heiti SC";
-  font-size: 12px;
-  font-weight: 500;
-  margin: 10px;
-    color: #F36;
-
-}
-
-.logo-bar {
-  height: 50px;
-  max-width: 70%;
-  background-color: #F36;
-  color: #FFF;
-  font-family: "Heiti SC";
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-  margin: 10px;
-  padding: 5px;
-  align-content: center;
-
-}
-
-.rectangle-button1 {
-  height: 51px;
-  max-width: 80%;
-  min-width: 40%;
-  border-radius: 8px;
-  background-color: #F36;
-  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.68);
-  color: #FFF;
-  font-family: "Heiti SC";
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-  margin: 10px;
-}
-
-.face-off-button {
-  height: 51px;
-  max-width: 100%;
-  border-radius: 8px;
-  background-color: #F36;
-  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.68);
-  color: #FFF;
-  font-family: "Heiti SC";
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-  margin: 10px;
-}
-
-.instructions {
+.header-buttons {
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
   width: 50%;
-  max-width: 90%;
-  height: 20px;
-  color: #F36;
-  font-family: "Heiti SC";
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-  margin: 20px;
-  padding: 30px;
+  /*border: 3px solid red;*/
+
 }
 
-.results {
-	color: #F36;
-  font-family: "Heiti SC";
+.startover {
+  font-size: 16px;
+  width: 100%; 
+  margin: 0;
+
+
 }
 
-.enter-rectangle {
-  height: 50px;
-  max-width: 100%;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #FBECEF 0%, #FFF 100%);
-  color: #F36;
-  font-family: "Heiti SC";
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-  padding: 20px;
-  margin: 10px;
+.share {
+  font-size: 16px;
+  margin: 0;
+  margin-right: 5px;
 }
 
+.share-container {
+  margin-left: 10px;
+
+}
+.link-input {
+  margin-top: 5px;
+  padding: 5px;
+
+}
+
+}
 /* .form-row { border: 3px solid green; } 
 .results-announce { border: 3px solid yellow; }
 section { border: 3px solid red; }
