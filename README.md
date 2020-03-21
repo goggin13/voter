@@ -13,8 +13,8 @@
     a. Need input for name of form
     b. Need input of options
     c. Need Go button
-    
-    
+
+
 2. Using javascript
     a. User should be able to add or remove options as needed
 
@@ -22,7 +22,7 @@
   https://agile-ridge-67293.herokuapp.com/lists
     The body of the request will look like the json below:
 		"JSON" = Javascript option notation (kinda like a csv file, both are data formats; that's what the api uses/reads/writes 			back to you. This is the language the front end talks to the backend with.
-    
+
       describe "POST /lists" do
     it "creates a list with options" do
       post lists_path(:format => :json), :params => {
@@ -51,9 +51,9 @@
 8. Create results page with:
 	Winner is ____
 	Display each voter name and ranked list
-	
-	
-	
+
+
+
 
 
 The jQuery syntax is tailor-made for selecting HTML elements and performing some action on the element(s).

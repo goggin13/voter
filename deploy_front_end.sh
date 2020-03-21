@@ -1,4 +1,4 @@
-#!/Users/mgoggin/.rvm/rubies/ruby-2.4.2/bin/ruby
+#!/Users/goggin/.rvm/rubies/ruby-2.4.2/bin/ruby
 AWS_ACCESS_KEY_ID = File.read(".aws_access_key_id").chomp
 AWS_SECRET_ACCESS_KEY = File.read(".aws_secret_access_key").chomp
 

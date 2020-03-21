@@ -1,16 +1,14 @@
 # docker run \
-#   -it \
 #   --name voter-web \
-#   -v /Users/mgoggin/Documents/projects/voter:/var/www/voter \
+#   -v $HOME/Documents/projects/voter:/var/www/voter \
 #   --rm \
-#   goggin13/voter \
-#   bash
+#   goggin13/voter
 
 docker run \
   -it \
   -p 3000:3000 \
   --name voter-web \
-  -v /Users/mgoggin/Documents/projects/voter:/var/www/voter \
+  -v $HOME/Documents/projects/voter:/var/www/voter \
   --rm \
   goggin13/voter \
   bash

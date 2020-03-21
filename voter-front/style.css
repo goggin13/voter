@@ -397,6 +397,23 @@ section {
 
 }
 
+.remove-option {
+  color: white;
+  float: right;
+  background: pink;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 8px;
+  float: right;
+}
+
+#add-option {
+  color: white;
+  background: pink;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 8px;
+  float: right;
 }
 /* .form-row { border: 3px solid green; } 
 .results-announce { border: 3px solid yellow; }

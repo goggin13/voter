@@ -1,4 +1,3 @@
-
 var list_id = getListId();
 
 function setUpLinkSharer (id) {
@@ -81,7 +80,7 @@ function setProgress(numberOfFaceOffsLeft) {
   var remainingwidth = totalwidth - progresswidth;
   var increment = remainingwidth/numberOfFaceOffsLeft;
   var newwidth = progresswidth + increment;
-  $("#my-bar").width(newwidth); 
+  $("#my-bar").width(newwidth);
 }
 
 function setWinner(face1id, face2id, face_offs) {
